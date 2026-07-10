@@ -1,6 +1,3 @@
 export const EMAIL = 'alamsaif1107@gmail.com'
 export const LINKEDIN_URL = 'https://www.linkedin.com/in/md-saif-alam-18426b311/'
 export const GITHUB_URL = 'https://github.com/CommitSaif11'
-export const LEETCODE_URL = 'https://leetcode.com/u/let_saif_it/'
-export const CODEFORCES_URL = 'https://codeforces.com/profile/saif_ali_11'
-export const CODEFORCES_ICON_URL = 'https://img.icons8.com/?size=100&id=YSy0lU4Y0X4z&format=png&color=000000'

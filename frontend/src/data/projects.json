@@ -5,7 +5,7 @@
     "tagline": "AI-powered APK malware analysis for bank fraud detection",
     "friendly_one_liner": "Upload a sketchy app, get a verdict in 30 seconds instead of guessing.",
     "built_for": "A public sector bank's fraud-ops team, via a national research institute",
-    "tech_stack": ["FastAPI", "React 19", "Groq LLM (Llama 3.3 70B)", "Androguard", "apktool", "JADX", "ReportLab"],
+    "tech_stack": ["FastAPI", "React 19", "Groq LLM", "Androguard", "apktool", "JADX", "ReportLab"],
     "impact_metrics": [
       "4-agent AI pipeline: Triage → Analyst → Synthesizer → Reporter",
       "Full verdict + PDF report in 15-30 seconds",
@@ -94,7 +94,7 @@
     "tagline": "Proactive multi-agent banking assistant that reaches out first",
     "friendly_one_liner": "A bank AI that messages you before you even know you need a loan.",
     "built_for": "SBI Hackathon",
-    "tech_stack": ["FastAPI", "LangChain", "Groq LLM (Llama 3.3 70B)", "React 19", "Pydantic v2"],
+    "tech_stack": ["FastAPI", "LangChain", "Groq LLM", "React 19", "Pydantic v2"],
     "impact_metrics": [
       "3-stage agent pipeline: rule-based trigger detection → product matching → LLM conversation",
       "Detects 6 life-event types from customer financial data",

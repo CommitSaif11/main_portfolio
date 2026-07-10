@@ -20,7 +20,9 @@ const NAV_BY_MODE = {
     { type: 'scroll', id: 'impact', label: 'Impact', icon: Trophy },
     { type: 'scroll', id: 'story', label: 'About', icon: User },
     { type: 'route', to: '/projects', label: 'Projects', icon: FolderGit2 },
-    { type: 'route', to: '/fit-check', label: 'Check my fit', icon: Target },
+    // Highlighted (coral, like the Terminal item in friend mode) since it's a
+    // genuinely unique feature most recruiters won't expect - worth calling out.
+    { type: 'route', to: '/fit-check', label: 'Check my fit', icon: Target, highlight: true },
     { type: 'scroll', id: 'contact', label: 'Contact', icon: Mail },
   ],
   friend: [
@@ -47,14 +49,14 @@ const NAV_UNDERLINE_CLASS =
   'pointer-events-none absolute left-1/2 -bottom-1 h-px w-full -translate-x-1/2 scale-x-0 bg-teal-400 ' +
   'transition-transform duration-base ease group-hover:scale-x-100'
 
-function NavItemContent({ Icon, label, active }) {
+function NavItemContent({ Icon, label, active, highlight }) {
   return (
     <>
       <Icon
         size={15}
         strokeWidth={2}
         aria-hidden="true"
-        className={NAV_ICON_CLASS + (active ? ' text-teal-400' : '')}
+        className={NAV_ICON_CLASS + (active ? (highlight ? ' text-coral-400' : ' text-teal-400') : '')}
       />
       <span className={NAV_LABEL_CLASS}>{label}</span>
       <span aria-hidden="true" className={NAV_UNDERLINE_CLASS} />
@@ -84,10 +86,20 @@ function ModeNavLinks({ items }) {
             to={item.to}
             end={item.end}
             className={({ isActive }) =>
-              NAV_ITEM_CLASS + ' ' + (isActive ? 'font-medium text-text-primary' : 'text-text-secondary hover:text-teal-400')
+              NAV_ITEM_CLASS +
+              ' ' +
+              (item.highlight
+                ? isActive
+                  ? 'font-medium text-coral-300'
+                  : 'text-coral-400 hover:text-coral-300'
+                : isActive
+                  ? 'font-medium text-text-primary'
+                  : 'text-text-secondary hover:text-teal-400')
             }
           >
-            {({ isActive }) => <NavItemContent Icon={item.icon} label={item.label} active={isActive} />}
+            {({ isActive }) => (
+              <NavItemContent Icon={item.icon} label={item.label} active={isActive} highlight={item.highlight} />
+            )}
           </NavLink>
         ) : item.type === 'action' ? (
           <button

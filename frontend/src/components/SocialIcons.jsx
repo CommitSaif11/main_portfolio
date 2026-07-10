@@ -1,6 +1,6 @@
 import { FaLinkedin, FaGithub } from 'react-icons/fa'
-import { SiLeetcode, SiGmail } from 'react-icons/si'
-import { EMAIL, LINKEDIN_URL, GITHUB_URL, LEETCODE_URL, CODEFORCES_URL, CODEFORCES_ICON_URL } from '../data/socials'
+import { SiGmail } from 'react-icons/si'
+import { EMAIL, LINKEDIN_URL, GITHUB_URL } from '../data/socials'
 import { btnSecondary } from '../styles/classNames'
 
 function IconLink({ href, label, children }) {
@@ -13,8 +13,7 @@ function IconLink({ href, label, children }) {
 }
 
 // Labeled buttons (icon + text), same style as the Contact page - not a bare
-// icon-only row. Same 5 profiles everywhere: email, LinkedIn, GitHub, LeetCode,
-// Codeforces.
+// icon-only row. Same 3 profiles everywhere: email, LinkedIn, GitHub.
 export default function SocialIcons({ className = '' }) {
   return (
     <div className={`flex flex-wrap items-center justify-center gap-3 ${className}`}>
@@ -26,12 +25,6 @@ export default function SocialIcons({ className = '' }) {
       </IconLink>
       <IconLink href={GITHUB_URL} label="GitHub">
         <FaGithub className="w-4 h-4 text-teal-400" aria-hidden="true" />
-      </IconLink>
-      <IconLink href={LEETCODE_URL} label="LeetCode">
-        <SiLeetcode className="w-4 h-4" style={{ color: '#FFA116' }} aria-hidden="true" />
-      </IconLink>
-      <IconLink href={CODEFORCES_URL} label="Codeforces">
-        <img src={CODEFORCES_ICON_URL} alt="" className="w-4 h-4" aria-hidden="true" />
       </IconLink>
     </div>
   )

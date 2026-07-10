@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom'
 import { useMode } from '../context/ModeContext'
 import Reveal from '../components/Reveal'
 import { FaLinkedin, FaGithub } from 'react-icons/fa'
-import { SiLeetcode, SiGmail } from 'react-icons/si'
-import { EMAIL, LINKEDIN_URL, GITHUB_URL, LEETCODE_URL, CODEFORCES_URL, CODEFORCES_ICON_URL } from '../data/socials'
+import { SiGmail } from 'react-icons/si'
+import { EMAIL, LINKEDIN_URL, GITHUB_URL } from '../data/socials'
 import { btnPrimary, btnSecondary, linkTeal, mutedText } from '../styles/classNames'
 
 const RESUME_URL = '/resume.pdf'
@@ -58,12 +58,6 @@ export default function Contact() {
         </IconLink>
         <IconLink href={GITHUB_URL} label="GitHub">
           <FaGithub className="w-4 h-4 text-teal-400" aria-hidden="true" />
-        </IconLink>
-        <IconLink href={LEETCODE_URL} label="LeetCode">
-          <SiLeetcode className="w-4 h-4" style={{ color: '#FFA116' }} aria-hidden="true" />
-        </IconLink>
-        <IconLink href={CODEFORCES_URL} label="Codeforces">
-          <img src={CODEFORCES_ICON_URL} alt="" className="w-4 h-4" aria-hidden="true" />
         </IconLink>
       </Reveal>
 

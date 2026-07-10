@@ -23,6 +23,7 @@ const HOVER_TARGETS = [
   { key: 'story', selector: '#story' },
   { key: 'personal', selector: '#personal' },
   { key: 'projects', selector: '#projects, a[href^="/projects"]' },
+  { key: 'fitCheck', selector: '#fit-check, a[href^="/fit-check"]' },
   { key: 'contact', selector: '#contact' },
 ]
 
@@ -32,6 +33,7 @@ const REACTION_LINES = {
     impact: ["Here's the highlight reel - proof, not claims."],
     story: ['This is who he is, not just what he shipped.'],
     projects: ["These are the ones I'd lead with."],
+    fitCheck: ['Paste your job description here - I\'ll score how well he actually fits it, live.'],
     contact: ["This is where you reach out. Mail will be the fastest."],
   },
   friend: {

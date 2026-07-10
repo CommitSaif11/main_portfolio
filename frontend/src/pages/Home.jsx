@@ -269,21 +269,27 @@ function TourSection({ id }) {
   )
 }
 
+// Same inline layout as FriendContactSection below - every way to reach out
+// is right here on the scroll, not hidden behind a click-through to /contact.
 function ContactSection({ heading = "Let's talk", id }) {
   return (
     <Reveal as="section" id={id} className="mt-20 text-center scroll-mt-24">
       <h2 className="text-xl font-semibold font-display text-text-primary">{heading}</h2>
-      <div className="mt-4">
-        <Link to="/contact" className={btnSecondary}>
-          Contact
-        </Link>
+      <p className={`mt-2 ${mutedText}`}>
+        Fastest way to reach me is email - happy to talk roles, projects, or anything in between.
+      </p>
+      <SocialIcons className="mt-5" />
+      <div className="mt-6 flex flex-wrap justify-center gap-3">
+        <a href="/resume.pdf" download className={btnSecondary}>
+          Download Resume
+        </a>
       </div>
     </Reveal>
   )
 }
 
 // Friend's contact section skips the extra click through to /contact - every
-// way to reach out (email, LinkedIn, GitHub, LeetCode, Codeforces) plus the
+// way to reach out (email, LinkedIn, GitHub) plus the
 // resume are all right here, since a friend wouldn't want to go hunting for it.
 function FriendContactSection({ id }) {
   return (
@@ -310,7 +316,7 @@ function RecruiterHome() {
       <Hero mode="recruiter" id="hero" />
       <ImpactSection mode="recruiter" id="impact" />
       <StorySection id="story" />
-      <ProjectTeasersSection mode="recruiter" list={flagship} />
+      <ProjectTeasersSection mode="recruiter" list={flagship} id="projects" />
       <SkillsSection id="skills" />
       <FitCheckSection id="fit-check" />
       <ContactSection id="contact" />
