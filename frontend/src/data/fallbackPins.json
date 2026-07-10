@@ -1,0 +1,9 @@
+[
+  { "label": "Karnataka", "country": "India", "is_state": true, "lat": 15.3173, "lng": 75.7139, "count": 1 },
+  { "label": "West Bengal", "country": "India", "is_state": true, "lat": 22.9868, "lng": 87.855, "count": 1 },
+  { "label": "United States", "country": "United States", "is_state": false, "lat": 37.0902, "lng": -95.7129, "count": 1 },
+  { "label": "Germany", "country": "Germany", "is_state": false, "lat": 51.1657, "lng": 10.4515, "count": 1 },
+  { "label": "United Kingdom", "country": "United Kingdom", "is_state": false, "lat": 55.3781, "lng": -3.436, "count": 1 },
+  { "label": "Singapore", "country": "Singapore", "is_state": false, "lat": 1.3521, "lng": 103.8198, "count": 1 },
+  { "label": "Canada", "country": "Canada", "is_state": false, "lat": 56.1304, "lng": -106.3468, "count": 1 }
+]

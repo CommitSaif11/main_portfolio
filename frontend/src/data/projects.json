@@ -1,0 +1,108 @@
+[
+  {
+    "id": "threatlens",
+    "name": "ThreatLens",
+    "tagline": "AI-powered APK malware analysis for bank fraud detection",
+    "friendly_one_liner": "Upload a sketchy app, get a verdict in 30 seconds instead of guessing.",
+    "built_for": "A public sector bank's fraud-ops team, via a national research institute",
+    "tech_stack": ["FastAPI", "React 19", "Groq LLM (Llama 3.3 70B)", "Androguard", "apktool", "JADX", "ReportLab"],
+    "impact_metrics": [
+      "4-agent AI pipeline: Triage → Analyst → Synthesizer → Reporter",
+      "Full verdict + PDF report in 15-30 seconds",
+      "Matches against 5 known banking-trojan malware families",
+      "3 independent risk dimensions scored (permission, impersonation, network)"
+    ],
+    "github": "https://github.com/CommitSaif11/AI_BANK_FRAUD_APK_Detection",
+    "live_demo": "https://apk-analyzer-frontend.onrender.com/",
+    "role": "Solo",
+    "tier": "flagship"
+  },
+  {
+    "id": "mulenet",
+    "name": "MuleNet",
+    "tagline": "AI fraud intelligence platform for mule account detection",
+    "friendly_one_liner": "Catches bank accounts being used to launder fraud money, with receipts.",
+    "built_for": "Personal project - banking fraud-ops use case",
+    "tech_stack": ["FastAPI", "React", "LightGBM", "XGBoost", "SHAP", "Scikit-learn", "Recharts"],
+    "impact_metrics": [
+      "AUC-ROC 99.1%, Precision 98.7% (5-fold cross-validation)",
+      "96.3% detection rate on High/Critical risk accounts",
+      "Live scoring API responds in under 50ms",
+      "SHAP explainability on every flagged account"
+    ],
+    "github": "https://github.com/CommitSaif11/Bank_Mule_Detection",
+    "live_demo": "https://mulenet-dashboard.onrender.com/",
+    "role": "Solo",
+    "tier": "flagship"
+  },
+  {
+    "id": "siliconseal",
+    "name": "SiliconSeal",
+    "tagline": "Counterfeit IC chip detection via computer vision + OCR",
+    "friendly_one_liner": "Point a camera at a chip, find out if it's fake - built for a national defense hackathon.",
+    "built_for": "A national defense-sector client - Smart India Hackathon 2025 Finals",
+    "tech_stack": ["FastAPI", "React 19", "YOLOv8", "PaddleOCR", "Groq LLM", "OpenCV", "Tailwind CSS v4"],
+    "impact_metrics": [
+      "SIH 2025 National Finals - defense-sector use case",
+      "3 scanning modes: single, batch (20 images), live camera",
+      "Weighted confidence scoring across part number, date code, lot code",
+      "Knowledge base of 27+ IC entries, auto-enrichable via Mouser API"
+    ],
+    "github": "https://github.com/CommitSaif11/SiliconSeal",
+    "live_demo": "https://siliconseal.onrender.com/",
+    "role": "Team",
+    "tier": "flagship"
+  },
+  {
+    "id": "connecthub",
+    "name": "ConnectHub",
+    "tagline": "Scalable full-stack social platform, fully async",
+    "friendly_one_liner": "A Twitter-style social app built to show off proper backend engineering, not AI.",
+    "built_for": "Personal project - backend engineering showcase",
+    "tech_stack": ["FastAPI (async)", "React 19", "PostgreSQL", "SQLAlchemy 2.0", "AWS S3", "Docker", "Alembic"],
+    "impact_metrics": [
+      "Fully async from HTTP routes to database queries",
+      "JWT auth + Argon2 password hashing",
+      "Image pipeline: resize + WebP conversion before S3 upload",
+      "Full Pytest suite with mocked S3 and database"
+    ],
+    "github": "https://github.com/CommitSaif11/ConnectHub",
+    "live_demo": null,
+    "role": "Solo",
+    "tier": "flagship"
+  },
+  {
+    "id": "fitnessai",
+    "name": "FitnessAI",
+    "tagline": "Computer-vision form checker for squats, curls, and shoulder press",
+    "friendly_one_liner": "A gym trainer in your webcam - tells you when your squat form is bad.",
+    "built_for": "Personal project - computer vision / pose estimation",
+    "tech_stack": ["MediaPipe", "OpenCV", "XGBoost", "Python"],
+    "impact_metrics": [
+      "Self-collected video dataset across 3 exercise classes",
+      "Live frame-by-frame classification + posture correction tips",
+      "Roadmap: LSTM upgrade + LLM-based real-time coaching feedback"
+    ],
+    "github": "https://github.com/CommitSaif11/FitnessAI",
+    "live_demo": null,
+    "role": "Solo",
+    "tier": "secondary"
+  },
+  {
+    "id": "sbi-finverse",
+    "name": "SBI FinVerse",
+    "tagline": "Proactive multi-agent banking assistant that reaches out first",
+    "friendly_one_liner": "A bank AI that messages you before you even know you need a loan.",
+    "built_for": "SBI Hackathon",
+    "tech_stack": ["FastAPI", "LangChain", "Groq LLM (Llama 3.3 70B)", "React 19", "Pydantic v2"],
+    "impact_metrics": [
+      "3-stage agent pipeline: rule-based trigger detection → product matching → LLM conversation",
+      "Detects 6 life-event types from customer financial data",
+      "Full reasoning transparency - 5 human-readable steps per response"
+    ],
+    "github": null,
+    "live_demo": null,
+    "role": "Solo",
+    "tier": "secondary"
+  }
+]

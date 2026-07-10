@@ -1,0 +1,25 @@
+{
+  "name": "Md Saif Alam",
+  "summary": "Md Saif Alam - final-year B.E. Artificial Intelligence & Machine Learning student at Cambridge Institute of Technology, Bangalore (CGPA 8.87/10, expected graduation May 2027). Currently a Project Intern at Samsung R&D Institute India through the Samsung PRISM program, leading a 4-member team building a production-grade AI-based UE Capability Logs Extractor & Summarizer using RAG pipelines and LLM integration.",
+  "what_i_do": "I build full-stack, AI-powered production systems - not notebooks. My default stack is FastAPI on the backend and React + Vite on the frontend, with LLMs (mostly via Groq) layered on top of deterministic, explainable pipelines rather than replacing them. Recurring pattern across my projects: a rule-based or classical-ML system produces the actual signal/verdict, and an LLM explains that result in plain English. I care about systems being auditable, not just \"the AI said so.\"",
+  "domains": [
+    "Fraud & malware detection",
+    "Counterfeit hardware detection",
+    "Computer vision & pose estimation",
+    "Conversational & agentic AI systems"
+  ],
+  "looking_for": "I am actively seeking opportunities in AI Engineering, Full Stack Development, and Python Development. I enjoy building intelligent systems, developing end-to-end applications, and solving real-world problems through technology. I am open to opportunities at both startups and established companies - I value environments that encourage learning, ownership, innovation, and meaningful impact, regardless of company size.",
+  "location": {
+    "relocation": "Open to international relocation opportunities.",
+    "remote": "Open to remote roles with companies worldwide.",
+    "visa": "Would require visa sponsorship for international relocation.",
+    "availability": "Available now for internships, part-time roles, and internship-to-full-time opportunities. Available for full-time positions after graduation in May 2027."
+  },
+  "personal": "AI and coding pulled me in because I love solving problems and creating things that can make a real impact. Outside the screen, I'm usually in the gym, playing badminton, cooking something new, or getting way too invested in a random new hobby I'll probably drop in three weeks. I'm endlessly curious and always exploring, whether it's a new technology, a new skill, or a completely random idea that sparks my interest.",
+  "achievements": [
+    "SIH 2025 Finalist (National) - built SiliconSeal for a national defense-sector client",
+    "2nd Place, MLH Hackathon @ Atria Institute of Technology, Bangalore",
+    "Team Lead across Samsung PRISM and national hackathons (4 & 6 member teams)",
+    "OCI 2025 Generative AI Professional, Oracle AI Vector Search Professional, OCI 2025 AI Foundations Associate (Oracle certifications, Oct 2025-2027)"
+  ]
+}

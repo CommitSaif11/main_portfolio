@@ -1,0 +1,380 @@
+[
+  {
+    "id": 0,
+    "text": "## About Saif\n\nMd Saif Alam — final-year B.E. Artificial Intelligence & Machine Learning student at\nCambridge Institute of Technology, Bangalore (CGPA 8.87/10, expected graduation May\n2027). Currently a Project Intern at Samsung R&D Institute India through the Samsung\nPRISM program, leading a 4-member team building a production-grade AI-based UE\nCapability Logs Extractor & Summarizer using RAG pipelines and LLM integration.",
+    "source": "about.md",
+    "section": "About Saif"
+  },
+  {
+    "id": 1,
+    "text": "## What I actually do\n\nI build full-stack, AI-powered production systems — not notebooks. My default stack is\nFastAPI on the backend and React + Vite on the frontend, with LLMs (mostly via Groq)\nlayered on top of deterministic, explainable pipelines rather than replacing them.\nRecurring pattern across my projects: a rule-based or classical-ML system produces the\nactual signal/verdict, and an LLM explains that result in plain English. I care about\nsystems being auditable, not just \"the AI said so.\"\n\nDomains I've worked in: fraud/malware detection, counterfeit hardware detection,\ncomputer vision + pose estimation, and conversational/agentic AI systems.",
+    "source": "about.md",
+    "section": "What I actually do"
+  },
+  {
+    "id": 2,
+    "text": "## What I'm looking for\n\nI am actively seeking opportunities in AI Engineering, Full Stack Development, and\nPython Development. I enjoy building intelligent systems, developing end-to-end\napplications, and solving real-world problems through technology.\n\nI am open to opportunities at both startups and established companies. I value\nenvironments that encourage learning, ownership, innovation, and meaningful impact,\nregardless of company size.",
+    "source": "about.md",
+    "section": "What I'm looking for"
+  },
+  {
+    "id": 3,
+    "text": "## Location & availability\n\n- Open to international relocation opportunities.\n- Open to remote roles with companies worldwide.\n- Would require visa sponsorship for international relocation.\n- Available now for internships, part-time roles, and internship-to-full-time\n  opportunities. Available for full-time positions after graduation in May 2027.",
+    "source": "about.md",
+    "section": "Location & availability"
+  },
+  {
+    "id": 4,
+    "text": "## A bit more personal\n\nAI and coding pulled me in because I love solving problems and creating things that\ncan make a real impact. Outside the screen, I'm usually in the gym, playing badminton,\nor cooking something new. I'm endlessly curious and always exploring, whether it's a\nnew technology, a new skill, or a completely random idea that sparks my interest.",
+    "source": "about.md",
+    "section": "A bit more personal"
+  },
+  {
+    "id": 5,
+    "text": "## Achievements\n\n- SIH 2025 Finalist (National) — built SiliconSeal for Bharat Electronics Limited (BEL)\n- 2nd Place, MLH Hackathon @ Atria Institute of Technology, Bangalore\n- Team Lead across Samsung PRISM and national hackathons (4 & 6 member teams)\n- OCI 2025 Generative AI Professional, Oracle AI Vector Search Professional, OCI 2025\n  AI Foundations Associate (Oracle certifications, Oct 2025–2027)",
+    "source": "about.md",
+    "section": "Achievements"
+  },
+  {
+    "id": 6,
+    "text": "## Why AI/ML?\n\nI got into AI/ML because I love building things that can think, adapt, and solve real problems. What keeps me hooked isn't just making models that are powerful, it's making them useful and trustworthy. I enjoy building systems where people can understand why the AI made a decision instead of treating it like a magic black box. That's why many of my projects focus on explainability and combining AI with solid software engineering.",
+    "source": "faq.md",
+    "section": "Why AI/ML?"
+  },
+  {
+    "id": 7,
+    "text": "## Why should we hire you?\n\nBecause I like shipping real products, not just demos. I enjoy building the entire system, from the AI model and backend APIs to authentication, deployment, and handling edge cases. I've worked on projects that made it to the Smart India Hackathon Finals and projects that are being used inside Samsung R&D. I also enjoy leading teams, learning quickly, and taking ownership of problems until they're solved.",
+    "source": "faq.md",
+    "section": "Why should we hire you?"
+  },
+  {
+    "id": 8,
+    "text": "## Biggest challenge you've faced in a project\n\nA concrete example: on SiliconSeal, OCR readings off physical IC chips are never perfect — glare, wear, and angle mean the extracted text is often slightly off. A binary match/no-match check would have made the system unreliable. I ended up building a weighted confidence scoring system instead (part number, date code, and lot code each carry different weight based on how decisive and forgeable-relevant they are), so the system degrades gracefully instead of failing outright on imperfect input.\n\nMore broadly, that's the pattern across most of my harder problems: the highest-accuracy approach isn't always the best product decision. I've had to trade off performance, reliability, and explainability more than once, and building systems that hold up in the real world while still explaining their decisions has probably been my biggest recurring technical challenge — and honestly the part I enjoy most.",
+    "source": "faq.md",
+    "section": "Biggest challenge you've faced in a project"
+  },
+  {
+    "id": 9,
+    "text": "## Strengths\n\n* I can take an idea from \"what if...\" to a working product.\n* I enjoy building complete systems, not just isolated models.\n* I learn new technologies quickly and love exploring unfamiliar problems.\n* I'm comfortable leading small teams and working under pressure.\n* I care about making AI practical, explainable, and reliable.",
+    "source": "faq.md",
+    "section": "Strengths"
+  },
+  {
+    "id": 10,
+    "text": "## Areas I'm actively improving\n\n* Going deeper into advanced machine learning and deep learning concepts.\n* Becoming better at system design and scalable architectures.\n* Writing cleaner and more optimized production code.\n* Getting better at communicating complex technical ideas in simple terms.",
+    "source": "faq.md",
+    "section": "Areas I'm actively improving"
+  },
+  {
+    "id": 11,
+    "text": "## Salary expectations / notice period\n\nI'm pretty flexible and prefer discussing compensation based on the role, responsibilities, and location. I'm open to internships and part-time opportunities before graduation and available for full-time roles after graduating in May 2027.",
+    "source": "faq.md",
+    "section": "Salary expectations / notice period"
+  },
+  {
+    "id": 12,
+    "text": "## What makes your projects different from typical student projects?\n\nI don't really enjoy building projects that stop at a Jupyter notebook. I like building things that feel real, with authentication, deployment, fallback handling, explainability, and proper user experiences. A few of my projects were also built for real organizations — ThreatLens for Bank of India / DFS / IIT Hyderabad, and SiliconSeal for Bharat Electronics Limited at SIH 2025 — which forced me to think beyond just \"making the model work.\"",
+    "source": "faq.md",
+    "section": "What makes your projects different from typical student projects?"
+  },
+  {
+    "id": 13,
+    "text": "## Are you looking for AI Engineering roles, Full Stack roles, or both?\n\nHonestly, both. I enjoy building intelligent systems and I also enjoy building the software around them. I'm looking for opportunities in AI Engineering, Full Stack Development, and Python Development, and I'm open to both startups and larger companies.",
+    "source": "faq.md",
+    "section": "Are you looking for AI Engineering roles, Full Stack roles, or both?"
+  },
+  {
+    "id": 14,
+    "text": "## Can I see your code?\n\nOf course. Most of my projects have public GitHub repositories and live demos linked throughout the portfolio. My current Samsung PRISM project isn't public since it's internal work, but I'm always happy to talk about it directly.",
+    "source": "faq.md",
+    "section": "Can I see your code?"
+  },
+  {
+    "id": 15,
+    "text": "## What it does\n\nConnectHub is a full-stack social posting platform. Users register, create and manage\nposts in a paginated feed, and manage their profile including picture uploads stored on\nAWS S3. It's a general-purpose backend engineering showcase rather than an AI project —\ndemonstrates production-grade API architecture, auth, and infra skills independent of\nthe AI/GenAI work in the other projects.",
+    "source": "project_connecthub.md",
+    "section": "What it does"
+  },
+  {
+    "id": 16,
+    "text": "## My role\n\nBuilt solo. Full-stack: async FastAPI backend architecture, auth system, S3 image\npipeline, database migrations, and the React frontend.",
+    "source": "project_connecthub.md",
+    "section": "My role"
+  },
+  {
+    "id": 17,
+    "text": "## Tech stack\n\n- Backend: FastAPI (fully async), SQLAlchemy 2.0 (async ORM, mapped columns),\n  PostgreSQL via asyncpg, Alembic migrations, AWS S3 (profile pictures), Pillow (image\n  processing), PyJWT, pwdlib/Argon2 (password hashing), aiosmtplib (async email)\n- Frontend: React 19, Vite, React Router, Axios\n- Testing: Pytest with moto (mocked S3) and SQLite",
+    "source": "project_connecthub.md",
+    "section": "Tech stack"
+  },
+  {
+    "id": 18,
+    "text": "## Key results / metrics\n\n- Fully async from HTTP routes down to database queries — no blocking I/O in the\n  request path.\n- JWT-based stateless auth with configurable expiry.\n- Argon2 password hashing (modern, memory-hard — stronger default than bcrypt for\n  new projects).\n- Email-based password reset flow with hashed, expiring tokens.\n- Profile pictures are resized to 200x200 and converted to WebP before S3 upload,\n  cutting storage size and bandwidth.\n- Ownership-based authorization on every mutating endpoint (users/posts can only be\n  edited or deleted by their owner).\n- Full Pytest suite with S3 and database mocked out, so tests run without any real\n  cloud dependency.",
+    "source": "project_connecthub.md",
+    "section": "Key results / metrics"
+  },
+  {
+    "id": 19,
+    "text": "## Interesting decisions / tradeoffs\n\n- **Fully async architecture end-to-end:** chose async SQLAlchemy 2.0 + asyncpg over\n  the simpler sync stack specifically to demonstrate handling concurrent I/O-bound\n  load correctly, which matters more here than in the AI projects where the LLM call\n  itself is usually the bottleneck.\n- **Argon2 over bcrypt:** Argon2 is the more modern, memory-hard hashing choice,\n  more resistant to GPU-based cracking — a deliberate \"do it properly\" choice rather\n  than the most common default.\n- **Image pipeline (resize + WebP conversion) before upload, not after:** saves S3\n  storage cost and serves smaller images to the frontend, at the cost of extra\n  server-side processing per upload — a bandwidth/cost vs. compute tradeoff.\n- **Alembic migrations from day one** rather than letting SQLAlchemy auto-create\n  tables, so schema changes are versioned and reproducible — the kind of discipline\n  that matters once a project has real users, even though this is a personal project.\n- **Mocked-dependency test suite (moto + SQLite)** so the test suite has zero\n  external dependency on real AWS credentials or a live Postgres instance, making CI\n  straightforward.",
+    "source": "project_connecthub.md",
+    "section": "Interesting decisions / tradeoffs"
+  },
+  {
+    "id": 20,
+    "text": "## Links\n\n- GitHub: https://github.com/CommitSaif11/ConnectHub",
+    "source": "project_connecthub.md",
+    "section": "Links"
+  },
+  {
+    "id": 21,
+    "text": "## What it does\n\nFitnessAI is a computer-vision fitness form-checker. It classifies which of three\nexercises (squats, bicep curls, shoulder press) a person is performing from live or\nuploaded video, and gives real-time posture correction tips based on body pose data —\naimed at catching bad form the way a trainer would, without needing one present.",
+    "source": "project_fitnessai.md",
+    "section": "What it does"
+  },
+  {
+    "id": 22,
+    "text": "## My role\n\nBuilt solo, end to end: collected the training video data myself for all three\nexercises, built the pose-to-feature extraction pipeline, trained the classifier, and\nbuilt the rule-based correction-tip logic and live video inference.",
+    "source": "project_fitnessai.md",
+    "section": "My role"
+  },
+  {
+    "id": 23,
+    "text": "## Tech stack (current version)\n\n- Pose extraction: MediaPipe + OpenCV — converts raw exercise video into frame-by-frame\n  pose landmark data\n- Classifier: XGBoost, trained on the extracted frame-wise pose features\n- Inference: OpenCV for live video input, frame-by-frame classification\n- Feedback: rule-based logic that maps specific pose deviations to posture correction\n  tips (e.g. knee alignment, back angle)",
+    "source": "project_fitnessai.md",
+    "section": "Tech stack (current version)"
+  },
+  {
+    "id": 24,
+    "text": "## Key results / metrics\n\n- Self-collected dataset across 3 exercise classes (squats, bicep curls, shoulder\n  press), converted from raw video into structured per-frame pose feature data via\n  MediaPipe.\n- Live classification pipeline: webcam/video input → MediaPipe pose extraction →\n  XGBoost classification → rule-based correction tip, running frame by frame in\n  real time.",
+    "source": "project_fitnessai.md",
+    "section": "Key results / metrics"
+  },
+  {
+    "id": 25,
+    "text": "## Interesting decisions / tradeoffs\n\n- **MediaPipe over training a custom pose model:** using MediaPipe's pretrained pose\n  landmarks as the feature source instead of building pose estimation from scratch\n  let the project focus its ML effort on the actual differentiator — classification\n  and form feedback — rather than reinventing pose estimation.\n- **XGBoost over a deep model for the first version:** with a self-collected dataset\n  of limited size, a gradient-boosted tree model on structured landmark features was\n  the more data-efficient choice than a neural network — good accuracy without\n  needing a huge video dataset.\n- **Rule-based correction tips as a deliberate v1 choice:** rules over specific pose\n  angles (e.g. knee-over-toe, back curvature) are fully explainable and don't need any\n  additional training data — a reasonable tradeoff for a first version, with a known\n  ceiling that motivated the planned upgrade below.",
+    "source": "project_fitnessai.md",
+    "section": "Interesting decisions / tradeoffs"
+  },
+  {
+    "id": 26,
+    "text": "## Planned upgrade (in progress / roadmap — worth mentioning if asked \"what's next\")\n\n- Replacing the frame-by-frame XGBoost classifier with an LSTM to model movement as a\n  temporal sequence rather than independent frames, which should better capture\n  rep-quality issues that only show up across time (e.g. tempo, incomplete range of\n  motion) rather than in a single frame.\n- Adding an LLM layer that receives a JSON snapshot of the live prediction every ~5\n  seconds and returns a short, natural-language posture correction tip (or other\n  relevant coaching feedback) instead of only fixed rule-based messages — same\n  \"deterministic system produces the signal, LLM explains it in plain language\"\n  pattern used in ThreatLens and SiliconSeal.",
+    "source": "project_fitnessai.md",
+    "section": "Planned upgrade (in progress / roadmap — worth mentioning if asked \"what's next\")"
+  },
+  {
+    "id": 27,
+    "text": "## Links\n\n- GitHub: https://github.com/CommitSaif11/FitnessAI",
+    "source": "project_fitnessai.md",
+    "section": "Links"
+  },
+  {
+    "id": 28,
+    "text": "## What it does\n\nMuleNet is a fraud intelligence platform for banks that detects mule accounts (accounts\nused to launder or move fraudulent funds). It ingests transaction/account data, scores\nevery account for fraud risk, classifies the type of mule typology involved, and gives\ninvestigators a SHAP-based explanation for every flagged account through a live\ndashboard and API.",
+    "source": "project_mulenet.md",
+    "section": "What it does"
+  },
+  {
+    "id": 29,
+    "text": "## My role\n\nBuilt solo. Designed and implemented the full ML pipeline (feature engineering, model\ntraining/ensembling, evaluation), the explainability layer, the FastAPI scoring API,\nand the React dashboard.",
+    "source": "project_mulenet.md",
+    "section": "My role"
+  },
+  {
+    "id": 30,
+    "text": "## Tech stack\n\n- Backend: FastAPI, Python\n- ML: LightGBM, XGBoost, Random Forest, Isolation Forest, KMeans, Scikit-learn,\n  imbalanced-learn\n- Explainability: SHAP\n- Frontend: React, Vite, Tailwind CSS, Recharts",
+    "source": "project_mulenet.md",
+    "section": "Tech stack"
+  },
+  {
+    "id": 31,
+    "text": "## Key results / metrics\n\n- AUC-ROC: 99.1% ± 0.5% (5-fold cross-validation)\n- Precision (fraud class): 98.7% ± 2.7%\n- Recall (fraud class): 72.8% ± 8.6%\n- AUC-PR: 92.9% ± 4.2%\n- 96.3% detection rate on High/Critical risk accounts (78 of 81)\n- Live single-account scoring API responds in under 50ms\n- No synthetic data used in test sets — evaluation is on real held-out data",
+    "source": "project_mulenet.md",
+    "section": "Key results / metrics"
+  },
+  {
+    "id": 32,
+    "text": "## Interesting decisions / tradeoffs\n\n- **Ensemble over a single model:** the pipeline combines LightGBM and XGBoost (for\n  supervised fraud classification) with Isolation Forest and KMeans (for unsupervised\n  anomaly/typology detection), rather than relying on one model type. Supervised\n  models are strong when labeled fraud patterns exist; the unsupervised layer helps\n  catch novel mule typologies that don't match historical labels.\n- **Precision vs. recall tradeoff is deliberate:** precision (98.7%) is prioritized\n  over recall (72.8%) because in a real banking fraud-ops context, false positives\n  mean wasted investigator time and customer friction, while the High/Critical bucket\n  still catches 96.3% of the accounts that matter most — the system is tuned to be\n  trusted, not just maximally sensitive.\n- **SHAP for every flagged account, not just model-level explainability:** each\n  individual account gets its own explanation, since the audience (bank\n  investigators/compliance) needs to justify a flag for reporting purposes, not just\n  see aggregate feature importance.\n- **Sub-50ms live scoring:** achieved by pre-training and serializing all models to\n  `.pkl` files ahead of time, so the live `/api/score/live` endpoint only does\n  inference, not training or heavy feature computation, on the request path.\n- **Mule typology classification (4 types)** on top of a single risk score, so\n  investigators get a \"what kind of mule pattern is this\" answer, not just a\n  fraud/not-fraud binary.",
+    "source": "project_mulenet.md",
+    "section": "Interesting decisions / tradeoffs"
+  },
+  {
+    "id": 33,
+    "text": "## Links\n\n- GitHub: https://github.com/CommitSaif11/Bank_Mule_Detection\n- Live Demo: https://mulenet-dashboard.onrender.com/",
+    "source": "project_mulenet.md",
+    "section": "Links"
+  },
+  {
+    "id": 34,
+    "text": "## What it does\n\nSBI FinVerse is a proactive banking AI agent built for an SBI Hackathon. Instead of\nwaiting for customers to ask about products, it continuously scans customer financial\nprofiles, detects meaningful life events (salary spikes, an upcoming insurance lapse,\nmarriage, approaching retirement, idle savings), and has an AI conversation agent\n(\"Aria\") initiate a warm, contextually relevant outreach with a tailored product\nrecommendation — the bank reaches out first.",
+    "source": "project_sbifinverse.md",
+    "section": "What it does"
+  },
+  {
+    "id": 35,
+    "text": "## My role\n\nBuilt in a team for a hackathon submission.\nMy specific role was to make the backend and the AI layer and how to manage the data for the RAG layer for the LLM.",
+    "source": "project_sbifinverse.md",
+    "section": "My role"
+  },
+  {
+    "id": 36,
+    "text": "## Tech stack\n\n- Backend: FastAPI, Python 3.10, LangChain + langchain-groq, Groq API\n  (llama-3.3-70b-versatile), Pydantic v2\n- Frontend: React 19, Vite 8, Axios, custom CSS (no framework)\n- Deployment: Render (render.yaml included)",
+    "source": "project_sbifinverse.md",
+    "section": "Tech stack"
+  },
+  {
+    "id": 37,
+    "text": "## Key results / metrics\n\n- 3-stage agent pipeline: a rule-based TriggerEngine (deterministic, no ML — explicitly\n  chosen for speed and explainability) detects 6 life-event types; a\n  ProductRecommender scores all 7 SBI products by tag overlap and returns the top 2\n  matches; a LangChain + Groq ConversationAgent generates the actual outreach or\n  conversational reply.\n- Every response includes 5 human-readable reasoning steps shown live in the UI, so\n  the agent's decision process is fully transparent rather than a black box.\n- Action-detection layer flags when a customer's reply contains confirmation language\n  (yes, sure, interested, go ahead, etc.) and surfaces a visible \"Action Confirmed\"\n  state.\n- Demo dataset of 5 customer profiles, each engineered to trigger a distinct life\n  event type, so the whole pipeline is demonstrable end-to-end without needing real\n  bank data.",
+    "source": "project_sbifinverse.md",
+    "section": "Key results / metrics"
+  },
+  {
+    "id": 38,
+    "text": "## Interesting decisions / tradeoffs\n\n- **Deterministic rule-based trigger detection, not ML, for life-event detection:**\n  a conscious choice — in a hackathon/banking context, \"why did the system flag this\n  customer\" needs to be instantly explainable to a bank stakeholder, and rule-based\n  logic is faster and fully auditable compared to a model that would need training\n  data the team didn't have.\n- **Splitting detection, recommendation, and conversation into 3 distinct agents**\n  rather than one LLM doing everything: keeps the parts that must be reliable (event\n  detection, product matching) deterministic, and reserves the LLM for the part that\n  actually benefits from natural language — the conversation itself.\n- **\"Initiate\" as a first-class message type:** the conversation agent has an explicit\n  proactive-outreach mode distinct from reply-continuation, which is the core product\n  differentiator (banks reaching out first) rather than a generic chatbot wrapper.\n- This is the weakest of the group in terms of polish/production-readiness — built\n  fast for a hackathon — but it's a good demonstration of multi-agent orchestration\n  design and is worth keeping in the RAG knowledge base as a \"here's how I think about\n  agent architecture\" example, even if not headlined as flagship work.",
+    "source": "project_sbifinverse.md",
+    "section": "Interesting decisions / tradeoffs"
+  },
+  {
+    "id": 39,
+    "text": "## Links\n\n- GitHub: https://github.com/CommitSaif11/SBI_FINVERSE",
+    "source": "project_sbifinverse.md",
+    "section": "Links"
+  },
+  {
+    "id": 40,
+    "text": "## What it does\n\nSiliconSeal is an automated optical inspection system that verifies whether an\nIntegrated Circuit (IC) chip is genuine or counterfeit by analyzing the text markings\nprinted on it — replacing the manual microscope-based inspection process. Built for\nBharat Electronics Limited (BEL) at Smart India Hackathon 2025 Finals (Problem\nStatement ID: 25162), where counterfeit ICs are a serious risk in defense and aerospace\nequipment.",
+    "source": "project_siliconseal.md",
+    "section": "What it does"
+  },
+  {
+    "id": 41,
+    "text": "## My role\n\nBuilt in a team of six with me as the team lead, presented at SIH 2025 National Finals for BEL. Designed and implemented the\nfull detection pipeline (YOLOv8 → PaddleOCR → verification/scoring), the malware\nknowledge base and pattern-matching engine, the Groq LLM risk-assessment layer, and\nboth the FastAPI backend and React frontend across 3 scanning modes.\nMy main role was making the AI Layer and the FastAPI Backend and governing all the team decisions.",
+    "source": "project_siliconseal.md",
+    "section": "My role"
+  },
+  {
+    "id": 42,
+    "text": "## Tech stack\n\n- Backend: FastAPI (Python 3.11), YOLOv8 (Ultralytics) for IC detection, PaddleOCR for\n  text extraction, Regex + Aho-Corasick trie for pattern verification, OpenCV/Pillow/\n  NumPy for image processing, JWT (python-jose + bcrypt) for admin auth\n- AI: Groq API, Llama 3.3 70B, for plain-English risk assessment\n- Frontend: React 19, Vite, Tailwind CSS v4, Framer Motion, React Dropzone\n- Deployment: Render (frontend), Hugging Face Spaces / Docker (backend)",
+    "source": "project_siliconseal.md",
+    "section": "Tech stack"
+  },
+  {
+    "id": 43,
+    "text": "## Key results / metrics\n\n- Pipeline: image upload → YOLOv8 detects and crops the IC region → PaddleOCR extracts\n  part number, date code, lot code, and logo → verification engine matches extracted\n  text against a knowledge base → weighted scoring engine produces a verdict.\n- Weighted confidence scoring: Part number 60%, Date code 25%, Lot code 15%.\n  GENUINE ≥85%, UNCERTAIN 50–84%, FAKE <50%.\n- Knowledge base of 27+ IC entries with OCR-tolerant regex patterns, auto-enrichable\n  via the Mouser API.\n- 3 scanning modes: single image, batch (up to 20 images), and live camera.\n- Dual verification algorithms: regex for known/catalogued ICs, Aho-Corasick trie for\n  auto-detection of unlisted ones.\n- YYWW date-code validation — a future-dated code is an automatic FAKE verdict, a\n  strong and cheap signal before any ML/LLM layer is even needed.",
+    "source": "project_siliconseal.md",
+    "section": "Key results / metrics"
+  },
+  {
+    "id": 44,
+    "text": "## Interesting decisions / tradeoffs\n\n- **Two verification algorithms instead of one:** regex handles ICs already in the\n  knowledge base precisely; the Aho-Corasick trie exists specifically for ICs *not*\n  yet catalogued, so the system degrades gracefully instead of just failing closed\n  on anything new.\n- **Weighted scoring instead of exact-match-only:** OCR on physical chip markings is\n  never perfect (glare, wear, angle), so the system needed graded confidence rather\n  than binary pass/fail — the 60/25/15 weighting reflects that the part number is the\n  most forgeable-relevant and reliable field, while lot code is the least decisive.\n- **LLM layer sits after the deterministic pipeline, not instead of it:** exactly\n  like ThreatLens — YOLO/OCR/scoring produce the actual verdict data, and Groq's job\n  is explaining that verdict in plain English with risk factors, not making the\n  call itself. Important for a defense-adjacent use case where the verdict has to be\n  justifiable.\n- **Handled the free-tier cold start head-on instead of hiding it:** since the\n  backend runs on Hugging Face Spaces free tier and sleeps after 15 minutes, the\n  frontend explicitly detects \"backend offline\" and shows a wake-up banner with a\n  retry button, rather than just showing a silent failure — a UX lesson directly\n  relevant to your own portfolio backend's cold-start problem.\n- **JWT-gated admin layer** (KB management, pattern generation) kept separate from\n  the public scanning endpoints, so the core product works with zero auth friction\n  while sensitive operations stay protected.",
+    "source": "project_siliconseal.md",
+    "section": "Interesting decisions / tradeoffs"
+  },
+  {
+    "id": 45,
+    "text": "## Links\n\n- GitHub: https://github.com/CommitSaif11/SiliconSeal\n- Live Demo: https://siliconseal.onrender.com/",
+    "source": "project_siliconseal.md",
+    "section": "Links"
+  },
+  {
+    "id": 46,
+    "text": "## What it does\n\nThreatLens is a full-stack APK malware analysis platform built for the Bank of India,\nDepartment of Financial Services, and IIT Hyderabad. A user uploads an Android APK and\nthe system reverse-engineers it, extracts metadata, scores it across three risk\ndimensions, matches it against known malware family fingerprints, and runs the result\nthrough a 4-agent LLM pipeline to produce a plain-English threat verdict plus a formal\ndownloadable PDF investigation report.",
+    "source": "project_threatlens.md",
+    "section": "What it does"
+  },
+  {
+    "id": 47,
+    "text": "## My role\n\nBuilt solo. Designed and implemented the full pipeline end to end: the static-analysis\nextraction layer, the three independent heuristic scorers, the malware fingerprinting\nsystem, the 4-agent LLM orchestration, the PDF report generator, and both the FastAPI\nbackend and React frontend.",
+    "source": "project_threatlens.md",
+    "section": "My role"
+  },
+  {
+    "id": 48,
+    "text": "## Tech stack\n\n- Backend: FastAPI, Python 3.11, Androguard (manifest/permission/certificate\n  extraction), apktool + JADX (decompilation to Java source)\n- AI: Groq API, Llama 3.3 70B, custom 4-agent pipeline\n- PDF generation: ReportLab\n- Frontend: React 19, Vite 8, Axios\n- Deployment: Render (frontend + backend)",
+    "source": "project_threatlens.md",
+    "section": "Tech stack"
+  },
+  {
+    "id": 49,
+    "text": "## Key results / metrics\n\n- Full pipeline (upload → heuristics → AI analysis → PDF report) completes in\n  ~15–30 seconds.\n- 4-agent architecture: Triage → Analyst → Synthesizer → Reporter, each agent\n  consuming the prior agents' outputs plus raw decompiled code and heuristic scores.\n- Risk scoring across 3 independent dimensions (permission abuse, bank\n  impersonation, network indicators), each contributing to a final 0–100 risk score\n  and CRITICAL/HIGH/MEDIUM/LOW/CLEAN verdict.\n- Malware fingerprinting against 5 known banking-trojan families (Anatsa, SOVA,\n  FluBot, TeaBot, Brata) using weighted Jaccard similarity across permission overlap,\n  package-name pattern, and C2 URL pattern.\n- Automated formal PDF report generation with executive summary, IOCs, and\n  customer-facing advisory language.",
+    "source": "project_threatlens.md",
+    "section": "Key results / metrics"
+  },
+  {
+    "id": 50,
+    "text": "## Interesting decisions / tradeoffs\n\n- **Why 4 separate agents instead of one big prompt:** splitting triage, deep\n  analysis, risk synthesis, and report writing into sequential specialized agents\n  keeps each prompt focused and makes the reasoning auditable — you can see exactly\n  where a verdict came from rather than trusting one opaque LLM call. It also lets\n  each agent be tuned/re-prompted independently.\n- **Real static analysis, not just an LLM guess:** heuristic scoring and fingerprint\n  matching run first and are fully deterministic; the LLM layer explains and\n  contextualizes those results rather than inventing them from scratch. That matters\n  for something bank-facing — a wrong AI call needs to be explainable, not a black\n  box.\n- **Rate-limit resilience:** each Groq call includes 3 retry attempts with 5-second\n  backoff on 429s, plus a deliberate 3-second pause between the 4 sequential agent\n  calls to avoid cascading rate limits — necessary since the free Groq tier is used\n  in production-style demos.\n- **JSON parsing fallback:** if an agent returns malformed JSON, the system retries\n  once with a stricter \"raw JSON only\" instruction before falling back to an\n  error-tagged response rather than crashing the whole pipeline.\n- **Weighted rather than binary fingerprint matching:** permission overlap, package\n  name, and C2 URL pattern are weighted 0.5/0.3/0.2 rather than requiring an exact\n  match, since real malware families and their clones vary in fingerprint but not in\n  intent.",
+    "source": "project_threatlens.md",
+    "section": "Interesting decisions / tradeoffs"
+  },
+  {
+    "id": 51,
+    "text": "## Links\n\n- GitHub: https://github.com/CommitSaif11/AI_BANK_FRAUD_APK_Detection\n- Live Demo: https://apk-analyzer-frontend.onrender.com/",
+    "source": "project_threatlens.md",
+    "section": "Links"
+  },
+  {
+    "id": 52,
+    "text": "## Md Saif Alam\n\nEmail: alamsaif1107@gmail.com\nPhone: +91 6294728757\nLinkedIn: https://www.linkedin.com/in/md-saif-alam-18426b311/\nGitHub: https://github.com/CommitSaif11",
+    "source": "resume.md",
+    "section": "Md Saif Alam"
+  },
+  {
+    "id": 53,
+    "text": "## Professional Summary\n\nFinal-year B.E. AI & ML student and Samsung PRISM intern with hands-on experience\nbuilding production-grade, AI-powered full-stack applications. Proficient in Python,\nFastAPI, React, RAG pipelines, LLMs, Generative AI, and computer vision with proven\nresults across fraud detection, malware analysis, counterfeit IC detection, and GenAI\nsystems. Experienced team lead seeking AI Engineering or Full Stack Development roles\nto deliver scalable, intelligent, production-ready solutions.",
+    "source": "resume.md",
+    "section": "Professional Summary"
+  },
+  {
+    "id": 54,
+    "text": "## Technical Skills\n\n- **Languages:** Python, C, JavaScript, HTML5, CSS3, SQL\n- **Frameworks:** React, FastAPI, Flask, PyTorch, Scikit-learn, LangChain, Pandas,\n  NumPy, Pydantic, Tailwind CSS\n- **AI / GenAI:** RAG Pipelines, LLMs, Generative AI, Prompt Engineering, Hugging Face,\n  YOLO, Ollama, Vector Embeddings, MediaPipe, AI Agents\n- **Databases:** PostgreSQL, MongoDB, MySQL, QdrantDB\n- **Tools & Cloud:** Git, Docker, REST APIs, AWS S3, Vercel, Render, Uvicorn, Jupyter\n  Notebook",
+    "source": "resume.md",
+    "section": "Technical Skills"
+  },
+  {
+    "id": 55,
+    "text": "## Project Intern — Samsung R&D Institute India (Samsung PRISM)\n\n*Jan 2026 – July 2026*\n\n- Leading a 4-member team building a production-grade AI-based UE Capability Logs\n  Extractor & Summarizer using RAG pipelines + LLM integration to parse NR, E-UTRA,\n  and CR band data.\n- Developing a scalable full-stack solution with FastAPI backend and React + Vite\n  frontend, in collaboration with Samsung engineers on real-world 5G/LTE data\n  extraction problems.",
+    "source": "resume.md",
+    "section": "Project Intern — Samsung R&D Institute India (Samsung PRISM)"
+  },
+  {
+    "id": 56,
+    "text": "## ThreatLens — APK Malware Analysis Platform\n\nStack: FastAPI, React, Groq LLM, Androguard, Python\nGitHub: https://github.com/CommitSaif11/AI_BANK_FRAUD_APK_Detection\nLive Demo: https://apk-analyzer-frontend.onrender.com/\n\n- Built a full-stack APK malware analysis tool with Androguard metadata extraction,\n  heuristic risk scoring, and malware fingerprint matching; both frontend and backend\n  deployed on Render.\n- Architected a 4-agent Generative AI pipeline delivering plain-English verdicts in\n  ~30 seconds with automated PDF report generation.",
+    "source": "resume.md",
+    "section": "ThreatLens — APK Malware Analysis Platform"
+  },
+  {
+    "id": 57,
+    "text": "## MuleNet — AI Fraud Intelligence Platform\n\nStack: FastAPI, React, LightGBM, XGBoost, SHAP, Scikit-learn\nGitHub: https://github.com/CommitSaif11/Bank_Mule_Detection\nLive Demo: https://mulenet-dashboard.onrender.com/\n\n- Engineered an ensemble ML pipeline achieving AUC-ROC 99.1%, Precision 98.7%, and\n  96.3% High/Critical detection via 5-fold cross-validation.\n- Integrated SHAP explainability and a live scoring REST API with under 50ms latency.",
+    "source": "resume.md",
+    "section": "MuleNet — AI Fraud Intelligence Platform"
+  },
+  {
+    "id": 58,
+    "text": "## SiliconSeal — IC Counterfeit Detection System\n\nStack: FastAPI, React, YOLOv8, PaddleOCR, Groq LLM, OpenCV\nGitHub: https://github.com/CommitSaif11/SiliconSeal\nLive Demo: https://siliconseal.onrender.com/\n\n- Built for BEL at Smart India Hackathon (SIH) 2025 Finals — pipeline: YOLOv8 IC\n  detection → PaddleOCR extraction → Aho-Corasick pattern matching → weighted scoring\n  engine (Part number 60%, Date code 25%, Lot code 15%).\n- Integrated Groq LLM (Llama 3.3 70B) for plain-English risk assessment, supporting\n  single, batch, and live camera scanning modes across 27+ IC entries in the knowledge\n  base.",
+    "source": "resume.md",
+    "section": "SiliconSeal — IC Counterfeit Detection System"
+  },
+  {
+    "id": 59,
+    "text": "## ConnectHub — Scalable Full Stack Social Platform\n\nStack: FastAPI, React 19, PostgreSQL, SQLAlchemy, AWS S3, Docker\nGitHub: https://github.com/CommitSaif11/ConnectHub\n\n- Architected a fully async RESTful API with JWT authentication, Argon2 password\n  hashing, email-based password reset, AWS S3 storage, Alembic migrations, and Docker\n  containerization.",
+    "source": "resume.md",
+    "section": "ConnectHub — Scalable Full Stack Social Platform"
+  },
+  {
+    "id": 60,
+    "text": "## Education\n\n- **B.E. — Artificial Intelligence & Machine Learning**, Cambridge Institute of\n  Technology, Bangalore. Expected May 2027. CGPA: 8.6/10.\n- Class XII (CBSE) — Hem Sheela Model School, Durgapur, WB. 89.2%. 2022.\n- Class X (CBSE) — Eastern Railway High School, Asansol, WB. 95.2%. 2020.",
+    "source": "resume.md",
+    "section": "Education"
+  },
+  {
+    "id": 61,
+    "text": "## Certifications\n\n- OCI 2025 Generative AI Professional — Oracle, Oct 2025–2027\n- Oracle AI Vector Search Professional — Oracle, Oct 2025–2027\n- OCI 2025 AI Foundations Associate — Oracle, Oct 2025–2027",
+    "source": "resume.md",
+    "section": "Certifications"
+  },
+  {
+    "id": 62,
+    "text": "## Achievements & Leadership\n\n- 2nd Place, MLH Hackathon @ Atria Institute of Technology, Bangalore\n- SIH 2025 Finalist (National — BEL)\n- Team Lead across Samsung PRISM and national hackathons (4-member teams)",
+    "source": "resume.md",
+    "section": "Achievements & Leadership"
+  }
+]

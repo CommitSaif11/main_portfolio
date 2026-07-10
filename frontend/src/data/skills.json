@@ -1,0 +1,7 @@
+{
+  "Languages": ["Python", "C", "C++", "JavaScript", "HTML5", "CSS3", "SQL"],
+  "Frameworks": ["React", "FastAPI", "Flask", "PyTorch", "Scikit-learn", "LangChain", "Pydantic", "Tailwind CSS"],
+  "AI / GenAI": ["RAG pipelines", "LLMs", "Prompt engineering", "Hugging Face", "YOLO", "MediaPipe", "AI agents"],
+  "Databases": ["PostgreSQL", "MongoDB", "MySQL", "QdrantDB"],
+  "Tools & Cloud": ["Git", "Docker", "REST APIs", "AWS S3", "Vercel", "Render"]
+}

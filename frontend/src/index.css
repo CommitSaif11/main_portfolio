@@ -1,0 +1,267 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+:root {
+  /* Background layers */
+  --bg-base: #0B0F14;
+  --bg-surface: #11161D;
+  --bg-surface-hover: #161C25;
+  --bg-elevated: #1A2129;
+
+  /* Primary accent - teal (everywhere-color) */
+  --teal-400: #2DD4BF;
+  --teal-500: #14B8A6;
+  --teal-600: #0D9488;
+  --teal-glow: rgba(45, 212, 191, 0.35);
+
+  /* Secondary accent - coral (rare-color, used sparingly) */
+  --coral-400: #FF8A65;
+  --coral-500: #FF7043;
+  --coral-glow: rgba(255, 112, 67, 0.35);
+
+  /* Text */
+  --text-primary: #F1F5F4;
+  --text-secondary: #9CA8A6;
+  --text-tertiary: #667070;
+
+  /* Borders */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-default: rgba(255, 255, 255, 0.14);
+  --border-teal: rgba(45, 212, 191, 0.4);
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+
+  /* Spacing (4px base) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* Motion */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Fonts */
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* Mode-wide accent themes. Every Tailwind teal and coral utility (text, bg,
+   border, shadow-glow) resolves through these custom properties (see
+   tailwind.config.js), so switching them here re-themes the site-wide accent
+   usage in one place - nav, buttons, links, cards, chat widget, terminal,
+   headings - not just one card. */
+[data-mode='friend'] {
+  /* A warmer, softer dark charcoal - not pure black - to match the playful/casual
+     accent colors. */
+  --bg-base: #120F0D;
+  --bg-surface: #1A1512;
+  --bg-surface-hover: #221A17;
+  --bg-elevated: #281F1B;
+
+  /* Warm coral/pink primary + amber secondary - visually distinct from the cooler
+     recruiter tones. */
+  --teal-400: #FB7185;
+  --teal-500: #F43F5E;
+  --teal-600: #E11D48;
+  --teal-glow: rgba(251, 113, 133, 0.35);
+  --border-teal: rgba(251, 113, 133, 0.4);
+
+  --coral-400: #FBBF24;
+  --coral-500: #F59E0B;
+  --coral-glow: rgba(251, 191, 36, 0.35);
+}
+
+/* Terminal open: flip to the matrix/hacker-green palette (the old developer-mode
+   accent), regardless of which mode is underneath - a strong visual cue that
+   you're now "inside the machine". Reverts the instant the terminal closes. */
+[data-terminal-open] {
+  --bg-base: #0A100D;
+  --bg-surface: #10160F;
+  --bg-surface-hover: #151D16;
+  --bg-elevated: #19231B;
+
+  --teal-400: #00FF9C;
+  --teal-500: #00CC7A;
+  --teal-600: #009960;
+  --teal-glow: rgba(0, 255, 156, 0.35);
+  --border-teal: rgba(0, 255, 156, 0.4);
+
+  --font-sans: 'JetBrains Mono', monospace;
+  --font-display: 'JetBrains Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+}
+
+a, button {
+  transition: color var(--transition-fast), background-color var(--transition-fast),
+    border-color var(--transition-fast), box-shadow var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+::selection {
+  background: var(--teal-500);
+  color: var(--bg-base);
+}
+
+/* Chatbot floating button - coral is reserved for this pulse/glow */
+@keyframes chat-widget-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 var(--coral-glow);
+  }
+  50% {
+    box-shadow: 0 0 0 12px rgba(255, 112, 67, 0);
+  }
+}
+
+.chat-widget-glow {
+  animation: chat-widget-pulse 2.4s ease-out infinite;
+}
+
+/* Terminal cursor - the other reserved coral usage */
+@keyframes terminal-cursor-blink {
+  0%, 49% {
+    opacity: 1;
+  }
+  50%, 100% {
+    opacity: 0;
+  }
+}
+
+.terminal-cursor {
+  color: var(--coral-400);
+  animation: terminal-cursor-blink 1s step-start infinite;
+}
+
+/* Scroll-triggered entrance animation, driven by IntersectionObserver via Reveal.jsx */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity var(--transition-base), transform var(--transition-base);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Impact card - recruiter mode: faint drifting background icons hinting at the next achievements */
+@keyframes impact-float-a {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(10px, -14px) rotate(6deg); }
+}
+@keyframes impact-float-b {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(-12px, 10px) rotate(-5deg); }
+}
+@keyframes impact-float-c {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(8px, 12px) rotate(4deg); }
+}
+
+.impact-float-a { animation: impact-float-a 9s ease-in-out infinite; }
+.impact-float-b { animation: impact-float-b 11s ease-in-out infinite; }
+.impact-float-c { animation: impact-float-c 7.5s ease-in-out infinite; }
+
+/* Impact card - friend mode: sticky notes toss/deal in like a thrown deck of cards,
+   landing with a physical multi-bounce settle. */
+@keyframes card-toss {
+  0% {
+    transform: translate(var(--toss-x), var(--toss-y)) rotate(var(--toss-rot)) scale(0.55);
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  55% {
+    transform: translate(0, 0) rotate(calc(var(--final-rot) - 12deg)) scale(1.1);
+  }
+  68% {
+    transform: translate(0, -6px) rotate(calc(var(--final-rot) + 5deg)) scale(0.96);
+  }
+  80% {
+    transform: translate(0, 3px) rotate(calc(var(--final-rot) - 3deg)) scale(1.03);
+  }
+  90% {
+    transform: translate(0, -1px) rotate(calc(var(--final-rot) + 1deg)) scale(0.99);
+  }
+  100% {
+    transform: translate(0, 0) rotate(var(--final-rot)) scale(1);
+    opacity: 1;
+  }
+}
+
+.card-toss {
+  animation: card-toss 850ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Impact card - friend mode: the "curse" warning bubble that pops up when someone
+   tries to drag a sticky note off the board. */
+@keyframes quote-pop {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, calc(-100% + 6px)) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -100%) scale(1);
+  }
+}
+
+.quote-bubble {
+  animation: quote-pop 200ms ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .chat-widget-glow,
+  .terminal-cursor,
+  .impact-float-a,
+  .impact-float-b,
+  .impact-float-c {
+    animation: none;
+  }
+  .card-toss {
+    animation: none;
+    opacity: 1;
+    transform: rotate(var(--final-rot));
+  }
+  .quote-bubble {
+    animation: none;
+    transform: translate(-50%, -100%);
+  }
+}
