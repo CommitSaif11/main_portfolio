@@ -5,9 +5,9 @@ import { focusRing } from '../styles/classNames'
 import { registerProximityZone, getProximityZones } from '../utils/proximityZones'
 
 const OPEN_EVENT = 'chat:open'
+export const CHAT_STATE_EVENT = 'chat:state' // broadcasts { open } so Mascot can dodge the panel
 const PROXIMITY_RADIUS = 90
 const PROXIMITY_OPEN_DELAY = 350
-const PROXIMITY_CLOSE_DELAY = 350
 // Guards against a manual click racing with the proximity check on the very
 // next mousemove tick (e.g. clicking "Close chat" while still hovering the
 // button would otherwise get reopened almost instantly).
@@ -116,7 +116,6 @@ export default function ChatWidget() {
   openRef.current = open
   const panelActiveRef = useRef(false) // hovered or focused inside the open panel
   const enterTimerRef = useRef(null)
-  const leaveTimerRef = useRef(null)
   const suppressUntilRef = useRef(0)
 
   useEffect(() => {
@@ -124,6 +123,11 @@ export default function ChatWidget() {
       listRef.current.scrollTop = listRef.current.scrollHeight
     }
   }, [messages, loading])
+
+  // Broadcast open/close so Mascot.jsx can keep Zoe from overlapping the panel.
+  useEffect(() => {
+    window.dispatchEvent(new CustomEvent(CHAT_STATE_EVENT, { detail: { open } }))
+  }, [open])
 
   // Lets the "Ask Zoe" hero CTA (and anything else) open the widget in full,
   // rather than routing away to /contact.
@@ -140,20 +144,15 @@ export default function ChatWidget() {
   useEffect(() => registerProximityZone(launcherRef.current), [])
 
   // Hovering near the hero tagline, the "Ask Zoe" CTA, or this corner button
-  // auto-opens the chat after a short linger; moving away auto-closes it after
-  // a short linger too - unless the visitor is actively using the open panel
-  // (typing, or just hovering it), which counts as "still in the zone".
+  // auto-opens the chat after a short linger. Moving out of the zone closes it
+  // instantly (no linger on the way out) - unless the visitor is actively using
+  // the open panel (typing, or just hovering it), which counts as "still in
+  // the zone".
   useEffect(() => {
     function clearEnterTimer() {
       if (enterTimerRef.current) {
         clearTimeout(enterTimerRef.current)
         enterTimerRef.current = null
-      }
-    }
-    function clearLeaveTimer() {
-      if (leaveTimerRef.current) {
-        clearTimeout(leaveTimerRef.current)
-        leaveTimerRef.current = null
       }
     }
 
@@ -170,7 +169,6 @@ export default function ChatWidget() {
           getProximityZones().some((el) => distanceToRect(e.clientX, e.clientY, el.getBoundingClientRect()) <= PROXIMITY_RADIUS)
 
         if (withinZone) {
-          clearLeaveTimer()
           if (!openRef.current && !enterTimerRef.current) {
             enterTimerRef.current = setTimeout(() => {
               enterTimerRef.current = null
@@ -180,13 +178,10 @@ export default function ChatWidget() {
           }
         } else {
           clearEnterTimer()
-          if (openRef.current && !leaveTimerRef.current) {
-            leaveTimerRef.current = setTimeout(() => {
-              leaveTimerRef.current = null
-              setOpen(false)
-              setMaximized(false)
-              setMinimized(false)
-            }, PROXIMITY_CLOSE_DELAY)
+          if (openRef.current) {
+            setOpen(false)
+            setMaximized(false)
+            setMinimized(false)
           }
         }
       })
@@ -196,7 +191,6 @@ export default function ChatWidget() {
     return () => {
       window.removeEventListener('mousemove', onMove)
       clearEnterTimer()
-      clearLeaveTimer()
     }
   }, [])
 

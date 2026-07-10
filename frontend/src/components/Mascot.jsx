@@ -1,12 +1,14 @@
 import { useEffect, useRef, useState } from 'react'
 import { useMode } from '../context/ModeContext'
-import { openChatWidget } from './ChatWidget'
+import { openChatWidget, CHAT_STATE_EVENT } from './ChatWidget'
 import zoeBody from '../assets/mascots/zoe-body.png'
 import zoeVisorTeal from '../assets/mascots/zoe-visor-teal.png'
 import zoeVisorWarm from '../assets/mascots/zoe-visor_warm.png'
 
-const SIZE = 140
-const EYE_SHIFT_MAX = 7 // px the visor nudges toward the cursor - subtle, not a full head turn
+const SIZE = 200 // ~1.45x the previous 140px - more visual presence
+const EDGE_MARGIN = 24
+const HYSTERESIS_PX = 40 // avoids flip-flopping right at the screen midpoint
+const EYE_SHIFT_MAX = 9 // px the visor nudges toward the cursor - subtle, not a full head turn
 const GREET_DELAY_MS = 900
 const GREET_MS = 3600
 const HOVER_BUBBLE_MS = 2600
@@ -29,7 +31,7 @@ const REACTION_LINES = {
     impact: ["Here's the highlight reel - proof, not claims."],
     story: ['This is who he is, not just what he shipped.'],
     projects: ["These are the ones I'd lead with."],
-    contact: ["This is where you reach out. I don't bite."],
+    contact: ["This is where you reach out. Mail will be the fastest."],
   },
   friend: {
     nav: ['pick a tab, any tab'],
@@ -60,13 +62,18 @@ export default function Mascot() {
   const reactionLines = REACTION_LINES[mode] ?? REACTION_LINES.recruiter
 
   const rootRef = useRef(null)
+  const [side, setSide] = useState('right')
+  const sideRef = useRef('right')
+  const chatOpenRef = useRef(false)
+  const lastMouseXRef = useRef(typeof window !== 'undefined' ? window.innerWidth : 0)
   const [eyeOffset, setEyeOffset] = useState({ x: 0, y: 0 })
   const [greetBubble, setGreetBubble] = useState(null)
   const [hoverBubble, setHoverBubble] = useState(null)
   const [hoveredSelf, setHoveredSelf] = useState(false)
   const lastHoverKeyRef = useRef(null)
   const hoverTimeoutRef = useRef(null)
-  const rafPendingRef = useRef(false)
+  const eyeRafPendingRef = useRef(false)
+  const sideRafPendingRef = useRef(false)
 
   // Greet shortly after mount - once per page load.
   useEffect(() => {
@@ -79,14 +86,62 @@ export default function Mascot() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  // Eyes only: small offset toward the cursor, computed from Zoe's fixed
-  // on-screen position. The body itself never moves.
+  // Left/right side-swap: whichever half of the screen the cursor is in, Zoe
+  // slides to hug that edge (a full position swap, not continuous following).
+  // A small hysteresis band around the midpoint stops rapid flip-flopping.
+  // Suspended while the chat panel is open (see the chat-state effect below) so
+  // she never drifts back onto the corner button/panel while it's on screen.
   useEffect(() => {
     function onMove(e) {
-      if (rafPendingRef.current) return
-      rafPendingRef.current = true
+      lastMouseXRef.current = e.clientX
+      if (chatOpenRef.current) return
+      if (sideRafPendingRef.current) return
+      sideRafPendingRef.current = true
       requestAnimationFrame(() => {
-        rafPendingRef.current = false
+        sideRafPendingRef.current = false
+        const mid = window.innerWidth / 2
+        const next =
+          e.clientX < mid - HYSTERESIS_PX ? 'left' : e.clientX > mid + HYSTERESIS_PX ? 'right' : sideRef.current
+        if (next !== sideRef.current) {
+          sideRef.current = next
+          setSide(next)
+        }
+      })
+    }
+    window.addEventListener('mousemove', onMove)
+    return () => window.removeEventListener('mousemove', onMove)
+  }, [])
+
+  // The chat panel and the corner launcher both live bottom-right, so whenever
+  // the chat is open, force Zoe to the left edge regardless of the cursor -
+  // they should never visually collide. Once it closes, snap back to whichever
+  // side the cursor is actually on.
+  useEffect(() => {
+    function onChatState(e) {
+      const isOpen = !!e.detail?.open
+      chatOpenRef.current = isOpen
+      if (isOpen) {
+        sideRef.current = 'left'
+        setSide('left')
+      } else {
+        const mid = window.innerWidth / 2
+        const restored = lastMouseXRef.current < mid - HYSTERESIS_PX ? 'left' : 'right'
+        sideRef.current = restored
+        setSide(restored)
+      }
+    }
+    window.addEventListener(CHAT_STATE_EVENT, onChatState)
+    return () => window.removeEventListener(CHAT_STATE_EVENT, onChatState)
+  }, [])
+
+  // Eyes only: small offset toward the cursor, computed from Zoe's current
+  // on-screen position. The body itself only moves between the two edges.
+  useEffect(() => {
+    function onMove(e) {
+      if (eyeRafPendingRef.current) return
+      eyeRafPendingRef.current = true
+      requestAnimationFrame(() => {
+        eyeRafPendingRef.current = false
         const rect = rootRef.current?.getBoundingClientRect()
         if (!rect) return
         const cx = rect.left + rect.width / 2
@@ -140,23 +195,35 @@ export default function Mascot() {
   }, [reactionLines])
 
   const bubble = hoverBubble ?? greetBubble
+  const edgeStyle =
+    side === 'left' ? { left: EDGE_MARGIN, right: 'auto' } : { left: 'auto', right: EDGE_MARGIN }
 
   return (
     <div
       ref={rootRef}
-      className="fixed z-[60] pointer-events-none"
-      style={{ right: 24, top: '50%', transform: 'translateY(-50%)', width: SIZE, height: SIZE }}
+      className="fixed z-[60] pointer-events-none transition-[left,right] duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
+      style={{ ...edgeStyle, top: '50%', transform: 'translateY(-50%)', width: SIZE, height: SIZE }}
     >
       {bubble && (
-        <div className="zoe-bubble absolute bottom-full mb-2 right-0 w-[220px] pointer-events-none">
-          <div className="bg-bg-elevated border border-border-default rounded-lg px-3 py-2 text-xs text-text-primary shadow-lg">
+        <div
+          className={
+            'zoe-bubble-pop absolute bottom-full mb-3 w-[260px] pointer-events-none ' +
+            (side === 'left' ? 'left-0' : 'right-0')
+          }
+        >
+          <div className="zoe-bubble-panel rounded-xl border-2 px-4 py-3 text-sm font-medium leading-snug text-text-primary shadow-glow-teal">
             {bubble}
           </div>
         </div>
       )}
 
       {hoveredSelf && !bubble && (
-        <div className="zoe-label absolute bottom-full mb-2 right-1/2 translate-x-1/2 pointer-events-none whitespace-nowrap">
+        <div
+          className={
+            'zoe-label absolute bottom-full mb-2 pointer-events-none whitespace-nowrap ' +
+            (side === 'left' ? 'left-1/2 -translate-x-1/2' : 'right-1/2 translate-x-1/2')
+          }
+        >
           <div className="bg-bg-elevated border border-border-default rounded-full px-2.5 py-1 text-[11px] font-medium text-text-primary shadow-lg">
             Ask Zoe
           </div>
