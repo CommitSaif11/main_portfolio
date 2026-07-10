@@ -5,6 +5,7 @@ import zoeBody from '../assets/mascots/zoe-body.png'
 import zoeVisorTeal from '../assets/mascots/zoe-visor-teal.png'
 import zoeVisorWarm from '../assets/mascots/zoe-visor_warm.png'
 
+const MOBILE_BREAKPOINT = 768 // matches Tailwind's md - cursor-follow/side-swap don't translate to touch
 const SIZE = 200 // ~1.45x the previous 140px - more visual presence
 const EDGE_MARGIN = 24
 const HYSTERESIS_PX = 40 // avoids flip-flopping right at the screen midpoint
@@ -55,8 +56,23 @@ const VISOR_LAYOUT = {
   warm: { left: '-32.04%', top: '-78.43%', width: '164.8%', height: '276.0%' },
 }
 
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== 'undefined' ? window.innerWidth < MOBILE_BREAKPOINT : false,
+  )
+  useEffect(() => {
+    function onResize() {
+      setIsMobile(window.innerWidth < MOBILE_BREAKPOINT)
+    }
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [])
+  return isMobile
+}
+
 export default function Mascot() {
   const { mode } = useMode()
+  const isMobile = useIsMobile()
   const visorSrc = mode === 'friend' ? zoeVisorWarm : zoeVisorTeal
   const visorLayout = mode === 'friend' ? VISOR_LAYOUT.warm : VISOR_LAYOUT.teal
   const reactionLines = REACTION_LINES[mode] ?? REACTION_LINES.recruiter
@@ -197,6 +213,10 @@ export default function Mascot() {
   const bubble = hoverBubble ?? greetBubble
   const edgeStyle =
     side === 'left' ? { left: EDGE_MARGIN, right: 'auto' } : { left: 'auto', right: EDGE_MARGIN }
+
+  // Cursor-follow, side-swap, and hover reactions are all mouse-driven and
+  // don't translate to touch - just don't render her on mobile.
+  if (isMobile) return null
 
   return (
     <div
