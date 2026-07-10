@@ -1,7 +1,6 @@
 # Md Saif Alam
 
 Email: alamsaif1107@gmail.com
-Phone: +91 6294728757
 LinkedIn: https://www.linkedin.com/in/md-saif-alam-18426b311/
 GitHub: https://github.com/CommitSaif11
 
