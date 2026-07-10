@@ -1,7 +1,8 @@
-"""Build sentence-transformer embeddings for the markdown knowledge base.
+"""Build fastembed embeddings for the markdown knowledge base.
 
 Reads data/raw/*.md, chunks into ~200-400 token pieces (splitting on headings and
-paragraph boundaries), embeds with all-MiniLM-L6-v2, and writes:
+paragraph boundaries), embeds with the ONNX export of all-MiniLM-L6-v2 (via
+fastembed - no torch dependency, much lighter at runtime), and writes:
   - data/processed/chunks.json   (list of {id, text, source, section})
   - data/processed/embeddings.npy (float32 array, same row order as chunks.json)
 """
@@ -11,12 +12,14 @@ import re
 from pathlib import Path
 
 import numpy as np
-from sentence_transformers import SentenceTransformer
+from fastembed import TextEmbedding
 
 ROOT = Path(__file__).resolve().parents[2]
 RAW_DIR = ROOT / "data" / "raw"
 PROCESSED_DIR = ROOT / "data" / "processed"
-MODEL_NAME = "all-MiniLM-L6-v2"
+# fastembed's own ONNX export of the same sentence-transformers model previously
+# used directly - same weights/dims, just no torch runtime dependency.
+MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"
 MIN_TOKENS = 200
 MAX_TOKENS = 400
 
@@ -124,11 +127,10 @@ def main():
         return
 
     print(f"Loading model '{MODEL_NAME}'...")
-    model = SentenceTransformer(MODEL_NAME)
+    model = TextEmbedding(model_name=MODEL_NAME)
 
     texts = [c["text"] for c in chunks]
-    embeddings = model.encode(texts, show_progress_bar=True, convert_to_numpy=True)
-    embeddings = embeddings.astype("float32")
+    embeddings = np.array(list(model.embed(texts)), dtype="float32")
 
     chunks_path = PROCESSED_DIR / "chunks.json"
     embeddings_path = PROCESSED_DIR / "embeddings.npy"

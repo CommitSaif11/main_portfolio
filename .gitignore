@@ -36,3 +36,6 @@ Thumbs.db
 # --- Claude Code session state / internal project notes ---
 .claude/
 context.md
+
+# --- Local rollback safety nets - not part of the deployed app ---
+data/processed/backup_sentencetransformers/
