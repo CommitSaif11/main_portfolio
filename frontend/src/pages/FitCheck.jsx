@@ -61,7 +61,12 @@ export default function FitCheck({ embedded = false }) {
 
   return (
     <div className={embedded ? '' : 'max-w-3xl mx-auto px-6 py-16'}>
-      <Reveal>
+      {!embedded && (
+        <Link to="/" className={`text-sm ${linkTeal}`}>
+          ← Back home
+        </Link>
+      )}
+      <Reveal className={embedded ? undefined : 'mt-4'}>
         {embedded ? (
           <h2 className="text-xl font-semibold font-display text-text-primary">Check my fit</h2>
         ) : (

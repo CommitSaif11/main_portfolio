@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { useMode } from '../context/ModeContext'
 import Reveal from '../components/Reveal'
 import { FaLinkedin, FaGithub } from 'react-icons/fa'
@@ -36,7 +37,11 @@ export default function Contact() {
 
   return (
     <div className="max-w-2xl mx-auto px-6 py-16 text-center">
-      <Reveal>
+      <Link to="/" className={`text-sm ${linkTeal}`}>
+        ← Back home
+      </Link>
+
+      <Reveal className="mt-4">
         <h1 className="text-2xl font-semibold font-display text-text-primary">Get in touch</h1>
         <p className={`mt-2 ${mutedText}`}>
           Fastest way to reach me is email - happy to talk roles, projects, or anything in between.

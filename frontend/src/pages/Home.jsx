@@ -1,6 +1,7 @@
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useMode } from '../context/ModeContext'
+import { registerProximityZone } from '../utils/proximityZones'
 import ProjectTeaser from '../components/ProjectTeaser'
 import ProjectCard from '../components/ProjectCard'
 import Reveal from '../components/Reveal'
@@ -19,6 +20,7 @@ const CONTENT = {
   recruiter: {
     headline: 'Md Saif Alam - AI Engineer & Full Stack Developer',
     subline: 'Ask Zoe, my RAG-powered AI assistant, about me and my projects - or dive straight into the projects yourself.',
+    highlight: 'RAG-powered AI assistant',
     ctas: [
       { label: 'Ask Zoe', action: 'openChat' },
       { label: 'Download Resume', href: '/resume.pdf' },
@@ -29,6 +31,7 @@ const CONTENT = {
     headline: "Hey, I'm Saif 👋",
     subline:
       "There's a terminal game hiding here, a chatbot that'll roast my code if you ask it right, and a globe with pins from wherever you're reading this. Go find them.",
+    highlight: 'chatbot',
     ctas: [
       { label: 'Play a game', to: '/play' },
       { label: 'Say hi', to: '/contact' },
@@ -37,11 +40,27 @@ const CONTENT = {
   },
 }
 
-function Cta({ cta, primary }) {
+// Splits the subline around its one accent phrase so it can be styled/animated
+// distinctly from the rest of the sentence, without hardcoding markup per mode.
+function Subline({ text, highlight }) {
+  const idx = text.indexOf(highlight)
+  if (idx === -1) return <>{text}</>
+  const before = text.slice(0, idx)
+  const after = text.slice(idx + highlight.length)
+  return (
+    <>
+      {before}
+      <span className="zoe-highlight-sweep font-semibold text-teal-400">{highlight}</span>
+      {after}
+    </>
+  )
+}
+
+function Cta({ cta, primary, ctaRef }) {
   const className = primary ? btnPrimary : btnSecondary
   if (cta.action === 'openChat') {
     return (
-      <button type="button" onClick={openChatWidget} className={className}>
+      <button ref={ctaRef} type="button" onClick={openChatWidget} className={className}>
         {cta.label}
       </button>
     )
@@ -66,17 +85,34 @@ function Cta({ cta, primary }) {
 // page feels alive instead of just appearing fully-formed.
 function Hero({ mode, id }) {
   const content = CONTENT[mode] ?? CONTENT.friend
+  const sublineRef = useRef(null)
+  const chatCtaRef = useRef(null)
+
+  // Hovering near the tagline or the "Ask Zoe" CTA is one of the proximity
+  // zones that auto-opens the chat widget (see ChatWidget.jsx) - registered
+  // here since those elements only exist within this Home page.
+  useEffect(() => {
+    const unregisterSubline = registerProximityZone(sublineRef.current)
+    const unregisterCta = chatCtaRef.current ? registerProximityZone(chatCtaRef.current) : () => {}
+    return () => {
+      unregisterSubline()
+      unregisterCta()
+    }
+  }, [mode])
+
   return (
     <section id={id} className="text-center scroll-mt-24">
       <Reveal as="h1" delayMs={0} className="text-3xl sm:text-4xl font-semibold font-display text-text-primary">
         {content.headline}
       </Reveal>
-      <Reveal as="p" delayMs={120} className={`mt-4 max-w-2xl mx-auto ${mutedText}`}>
-        {content.subline}
+      <Reveal as="p" delayMs={120} className={`mt-4 max-w-2xl mx-auto text-lg sm:text-xl ${mutedText}`}>
+        <span ref={sublineRef}>
+          <Subline text={content.subline} highlight={content.highlight} />
+        </span>
       </Reveal>
       <Reveal delayMs={240} className="mt-8 flex flex-wrap justify-center gap-3">
         {content.ctas.map((cta, i) => (
-          <Cta key={cta.label} cta={cta} primary={i === 0} />
+          <Cta key={cta.label} cta={cta} primary={i === 0} ctaRef={cta.action === 'openChat' ? chatCtaRef : undefined} />
         ))}
       </Reveal>
       <Reveal delayMs={360}>

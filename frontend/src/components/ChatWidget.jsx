@@ -2,8 +2,22 @@ import { useState, useRef, useEffect } from 'react'
 import { Bot, Maximize2, Minimize2, Minus, X } from 'lucide-react'
 import { useMode } from '../context/ModeContext'
 import { focusRing } from '../styles/classNames'
+import { registerProximityZone, getProximityZones } from '../utils/proximityZones'
 
 const OPEN_EVENT = 'chat:open'
+const PROXIMITY_RADIUS = 90
+const PROXIMITY_OPEN_DELAY = 350
+const PROXIMITY_CLOSE_DELAY = 350
+// Guards against a manual click racing with the proximity check on the very
+// next mousemove tick (e.g. clicking "Close chat" while still hovering the
+// button would otherwise get reopened almost instantly).
+const MANUAL_SUPPRESS_MS = 700
+
+function distanceToRect(x, y, rect) {
+  const dx = Math.max(rect.left - x, 0, x - rect.right)
+  const dy = Math.max(rect.top - y, 0, y - rect.bottom)
+  return Math.hypot(dx, dy)
+}
 
 // Lets other components (e.g. the "Ask Zoe" hero CTA) open the widget itself
 // instead of routing to /contact - mirrors Terminal's openTerminal() pattern.
@@ -94,7 +108,16 @@ export default function ChatWidget() {
   const [greeting, setGreeting] = useState('')
   const [suggestions, setSuggestions] = useState([])
   const listRef = useRef(null)
+  const launcherRef = useRef(null)
+  const panelRef = useRef(null)
   const launcherLabel = LAUNCHER_LABEL[mode] ?? LAUNCHER_LABEL.recruiter
+
+  const openRef = useRef(open)
+  openRef.current = open
+  const panelActiveRef = useRef(false) // hovered or focused inside the open panel
+  const enterTimerRef = useRef(null)
+  const leaveTimerRef = useRef(null)
+  const suppressUntilRef = useRef(0)
 
   useEffect(() => {
     if (listRef.current) {
@@ -111,6 +134,70 @@ export default function ChatWidget() {
     }
     window.addEventListener(OPEN_EVENT, handleOpen)
     return () => window.removeEventListener(OPEN_EVENT, handleOpen)
+  }, [])
+
+  // This launcher button is itself one of the 3 proximity zones.
+  useEffect(() => registerProximityZone(launcherRef.current), [])
+
+  // Hovering near the hero tagline, the "Ask Zoe" CTA, or this corner button
+  // auto-opens the chat after a short linger; moving away auto-closes it after
+  // a short linger too - unless the visitor is actively using the open panel
+  // (typing, or just hovering it), which counts as "still in the zone".
+  useEffect(() => {
+    function clearEnterTimer() {
+      if (enterTimerRef.current) {
+        clearTimeout(enterTimerRef.current)
+        enterTimerRef.current = null
+      }
+    }
+    function clearLeaveTimer() {
+      if (leaveTimerRef.current) {
+        clearTimeout(leaveTimerRef.current)
+        leaveTimerRef.current = null
+      }
+    }
+
+    let rafPending = false
+    function onMove(e) {
+      if (rafPending) return
+      rafPending = true
+      requestAnimationFrame(() => {
+        rafPending = false
+        if (Date.now() < suppressUntilRef.current) return
+
+        const withinZone =
+          panelActiveRef.current ||
+          getProximityZones().some((el) => distanceToRect(e.clientX, e.clientY, el.getBoundingClientRect()) <= PROXIMITY_RADIUS)
+
+        if (withinZone) {
+          clearLeaveTimer()
+          if (!openRef.current && !enterTimerRef.current) {
+            enterTimerRef.current = setTimeout(() => {
+              enterTimerRef.current = null
+              setOpen(true)
+              setMinimized(false)
+            }, PROXIMITY_OPEN_DELAY)
+          }
+        } else {
+          clearEnterTimer()
+          if (openRef.current && !leaveTimerRef.current) {
+            leaveTimerRef.current = setTimeout(() => {
+              leaveTimerRef.current = null
+              setOpen(false)
+              setMaximized(false)
+              setMinimized(false)
+            }, PROXIMITY_CLOSE_DELAY)
+          }
+        }
+      })
+    }
+
+    window.addEventListener('mousemove', onMove)
+    return () => {
+      window.removeEventListener('mousemove', onMove)
+      clearEnterTimer()
+      clearLeaveTimer()
+    }
   }, [])
 
   // Pick a fresh random greeting + the mode-appropriate initial chips each time
@@ -166,10 +253,13 @@ export default function ChatWidget() {
 
   return (
     <>
-      {/* Coral is reserved for this launcher's pulse/glow - the single most "come click me" element on the site */}
+      {/* Independent corner launcher - coexists with Zoe (Mascot.jsx), which opens
+          this same widget via openChatWidget(). Neither replaces the other. */}
       <button
+        ref={launcherRef}
         type="button"
         onClick={() => {
+          suppressUntilRef.current = Date.now() + MANUAL_SUPPRESS_MS
           setOpen((v) => !v)
           setMinimized(false)
         }}
@@ -186,9 +276,24 @@ export default function ChatWidget() {
 
       {open && (
         <div
+          ref={panelRef}
           role="dialog"
           aria-modal="true"
           aria-label={`Ask ${BOT_NAME} about Saif`}
+          onMouseEnter={() => {
+            panelActiveRef.current = true
+          }}
+          onMouseLeave={() => {
+            panelActiveRef.current = false
+          }}
+          onFocus={() => {
+            panelActiveRef.current = true
+          }}
+          onBlur={(e) => {
+            if (!panelRef.current?.contains(e.relatedTarget)) {
+              panelActiveRef.current = false
+            }
+          }}
           className={
             'fixed z-[60] border border-border-default bg-bg-elevated shadow-2xl flex flex-col overflow-hidden transition-[width,height] duration-base ease ' +
             (maximized
@@ -236,6 +341,7 @@ export default function ChatWidget() {
               <button
                 type="button"
                 onClick={() => {
+                  suppressUntilRef.current = Date.now() + MANUAL_SUPPRESS_MS
                   setOpen(false)
                   setMaximized(false)
                   setMinimized(false)

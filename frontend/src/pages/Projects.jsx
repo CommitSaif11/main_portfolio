@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useMode } from '../context/ModeContext'
 import ProjectCard from '../components/ProjectCard'
 import ProjectTeaser from '../components/ProjectTeaser'
@@ -18,7 +19,11 @@ export default function Projects() {
 
   return (
     <div className="max-w-5xl mx-auto px-6 py-12">
-      <h1 className="text-2xl font-semibold font-display text-text-primary">Projects</h1>
+      <Link to="/" className={`text-sm ${linkTeal}`}>
+        ← Back home
+      </Link>
+
+      <h1 className="mt-4 text-2xl font-semibold font-display text-text-primary">Projects</h1>
 
       <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
         {visible.map((project, i) => (

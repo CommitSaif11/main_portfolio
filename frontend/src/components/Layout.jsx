@@ -3,6 +3,7 @@ import { TerminalSquare, Home, Trophy, User, FolderGit2, Target, Mail, PartyPopp
 import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import ModeSwitcher from './ModeSwitcher'
 import ChatWidget from './ChatWidget'
+import Mascot from './Mascot'
 import Terminal, { openTerminal } from './Terminal'
 import { unlockCardAudio } from './HoverImpact'
 import { useMode } from '../context/ModeContext'
@@ -147,6 +148,7 @@ export default function Layout() {
       </main>
 
       <ChatWidget />
+      <Mascot />
       {showTerminal && <Terminal />}
     </div>
   )

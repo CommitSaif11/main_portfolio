@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { GraduationCap, Briefcase, MapPin, Clock } from 'lucide-react'
 import { useMode } from '../context/ModeContext'
 import about from '../data/about.json'
@@ -250,7 +251,10 @@ export default function About() {
 
   return (
     <div className="max-w-3xl mx-auto px-6 py-16">
-      {mode === 'friend' ? <FriendAbout /> : <RecruiterAbout />}
+      <Link to="/" className={`text-sm ${linkTeal}`}>
+        ← Back home
+      </Link>
+      <div className="mt-4">{mode === 'friend' ? <FriendAbout /> : <RecruiterAbout />}</div>
     </div>
   )
 }
