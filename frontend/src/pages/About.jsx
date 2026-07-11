@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { GraduationCap, Briefcase, MapPin, Clock } from 'lucide-react'
 import { useMode } from '../context/ModeContext'
 import about from '../data/about.json'
@@ -18,6 +18,7 @@ const QUICK_FACTS = [
     icon: Briefcase,
     label: 'Currently',
     value: 'Project Intern, Samsung R&D Institute India (Samsung PRISM) - leading a 4-member team',
+    scrollTo: 'experience',
   },
   {
     icon: MapPin,
@@ -34,20 +35,26 @@ const QUICK_FACTS = [
 const LOOKING_FOR_TAGS = ['AI Engineering', 'Full Stack Development', 'Python Development']
 
 function QuickFacts() {
+  const navigate = useNavigate()
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-      {QUICK_FACTS.map(({ icon: Icon, label, value }) => (
-        <div
-          key={label}
-          className="flex items-start gap-3 p-4 bg-bg-surface border border-border-subtle rounded-md transition duration-base ease hover:border-teal-500/40 hover:shadow-glow-teal"
-        >
-          <Icon className="shrink-0 mt-0.5 text-teal-400" size={18} strokeWidth={2} aria-hidden="true" />
-          <div>
-            <p className="text-xs font-medium uppercase tracking-wide text-text-tertiary">{label}</p>
-            <p className="mt-0.5 text-sm text-text-primary">{value}</p>
-          </div>
-        </div>
-      ))}
+      {QUICK_FACTS.map(({ icon: Icon, label, value, scrollTo }) => {
+        const Wrapper = scrollTo ? 'button' : 'div'
+        return (
+          <Wrapper
+            key={label}
+            type={scrollTo ? 'button' : undefined}
+            onClick={scrollTo ? () => navigate('/', { state: { scrollTo } }) : undefined}
+            className={`flex items-start gap-3 p-4 card-noise border border-border-subtle rounded-md transition duration-base ease hover:border-teal-500/40 hover:shadow-glow-teal ${scrollTo ? 'text-left w-full cursor-pointer' : ''}`}
+          >
+            <Icon className="shrink-0 mt-0.5 text-teal-400" size={18} strokeWidth={2} aria-hidden="true" />
+            <div>
+              <p className="text-xs font-medium uppercase tracking-wide text-text-tertiary">{label}</p>
+              <p className="mt-0.5 text-sm text-text-primary">{value}</p>
+            </div>
+          </Wrapper>
+        )
+      })}
     </div>
   )
 }
@@ -113,7 +120,7 @@ const PERSONAL_BULLETS = [
 function BentoCard({ title, className = '', children }) {
   return (
     <div
-      className={`p-4 bg-bg-surface border border-border-subtle rounded-md transition duration-base ease hover:border-teal-500/40 hover:shadow-glow-teal ${className}`}
+      className={`p-4 card-noise border border-border-subtle rounded-md transition duration-base ease hover:border-teal-500/40 hover:shadow-glow-teal ${className}`}
     >
       <p className="text-xs font-medium uppercase tracking-wide text-text-tertiary">{title}</p>
       <div className="mt-2">{children}</div>

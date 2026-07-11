@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
 import { LinkRow } from './ProjectCard'
-import { cardBase, tagTeal, mutedText } from '../styles/classNames'
+import { cardBase, mutedText, cardInFocusGlow, cardFocusTransition } from '../styles/classNames'
+import { categoryTagClass, classifyTech } from '../data/categoryColors'
+import useInFocus from '../hooks/useInFocus'
 
 // Compact teaser - name, tagline, top metrics, live-demo/GitHub links (visible
 // right here, not just after clicking through). The rest (remaining metrics,
@@ -9,9 +11,13 @@ import { cardBase, tagTeal, mutedText } from '../styles/classNames'
 // itself still links out to /projects/:id for anyone who wants a permalink.
 export default function ProjectTeaser({ project }) {
   const extraMetrics = project.impact_metrics.slice(2)
+  const [focusRef, inFocus] = useInFocus()
 
   return (
-    <div className={`group ${cardBase}`}>
+    <div
+      ref={focusRef}
+      className={`group ${cardBase} ${cardFocusTransition} ${inFocus ? cardInFocusGlow : ''}`}
+    >
       <Link to={`/projects/${project.id}`} className="inline-block">
         <h3 className="text-lg font-semibold font-display text-text-primary group-hover:text-teal-400 transition duration-fast ease">
           {project.name}
@@ -45,9 +51,19 @@ export default function ProjectTeaser({ project }) {
               ))}
             </ul>
           )}
+          {/* Tech tags are hidden until hover (see the grid-rows trick above), not
+              scroll-revealed, so their stagger rides the same group-hover trigger
+              instead of an IntersectionObserver - each tag fades + scales up with
+              a 35ms delay off the one before it once the panel opens. */}
           <div className="mt-3 flex flex-wrap gap-2">
-            {project.tech_stack.map((tech) => (
-              <span key={tech} className={tagTeal}>
+            {project.tech_stack.map((tech, i) => (
+              <span
+                key={tech}
+                style={{ transitionDelay: `${i * 35}ms` }}
+                className={`opacity-0 scale-90 group-hover:opacity-100 group-hover:scale-100 transition-[opacity,transform] duration-300 ease-out ${categoryTagClass(
+                  classifyTech(tech),
+                )}`}
+              >
                 {tech}
               </span>
             ))}

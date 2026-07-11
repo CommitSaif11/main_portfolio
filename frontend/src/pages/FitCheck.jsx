@@ -146,7 +146,7 @@ export default function FitCheck({ embedded = false }) {
               {result.matching_skills.map((skill) => (
                 <span
                   key={skill}
-                  className="text-xs rounded-full px-3 py-1 bg-green-500/10 text-green-400 border border-green-500/30"
+                  className="text-xs rounded-full px-3 py-1 bg-green-500/10 text-green-400 border border-green-500/30 transition duration-base ease hover:scale-105 hover:border-green-400 hover:bg-green-500/20"
                 >
                   {skill}
                 </span>
@@ -163,7 +163,7 @@ export default function FitCheck({ embedded = false }) {
               {result.gaps.map((gap) => (
                 <span
                   key={gap}
-                  className="text-xs rounded-full px-3 py-1 bg-bg-surface text-text-secondary border border-border-default"
+                  className="text-xs rounded-full px-3 py-1 bg-bg-surface text-text-secondary border border-border-default transition duration-base ease hover:scale-105 hover:border-teal-500/40 hover:text-teal-400"
                 >
                   {gap}
                 </span>

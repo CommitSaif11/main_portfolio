@@ -17,6 +17,8 @@ import {
   Shield,
   Clapperboard,
 } from 'lucide-react'
+import useInFocus from '../hooks/useInFocus'
+import Reveal from './Reveal'
 
 export const IMPACT_ITEMS = {
   recruiter: [
@@ -166,24 +168,30 @@ const SLOT_CONFIG = {
   hidden: { x: 0, scale: 0.5, opacity: 0, blurPx: 6, z: 0 },
 }
 
-function CoverflowCard({ item, color, slot, active, countUp, onClick }) {
+function CoverflowCard({ item, color, slot, active, countUp, inFocus, onClick }) {
   const Icon = item.icon
   const displayText = useCountUpText(item.text, countUp)
   const cfg = SLOT_CONFIG[slot]
+  const [hovered, setHovered] = useState(false)
+  // Hover bump on top of the slot's own scale - subtle, and only for cards a
+  // click would actually do something useful on (not the fully hidden slot).
+  const hoverScale = hovered && slot !== 'hidden' ? 1.04 : 1
 
   return (
     <button
       type="button"
       onClick={onClick}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
       aria-hidden={slot !== 'center'}
       tabIndex={slot === 'center' ? 0 : -1}
       style={{
         width: CARD_WIDTH_PX,
-        transform: `translateX(calc(-50% + ${cfg.x}px)) scale(${cfg.scale})`,
+        transform: `translateX(calc(-50% + ${cfg.x}px)) scale(${cfg.scale * hoverScale})`,
         opacity: cfg.opacity,
         filter: cfg.blurPx ? `blur(${cfg.blurPx}px)` : 'none',
         zIndex: cfg.z,
-        transition: 'transform 500ms ease-out, opacity 500ms ease-out, filter 500ms ease-out',
+        transition: 'transform 300ms ease-out, opacity 500ms ease-out, filter 500ms ease-out, box-shadow 380ms ease',
         pointerEvents: slot === 'hidden' ? 'none' : 'auto',
       }}
       className={
@@ -193,7 +201,7 @@ function CoverflowCard({ item, color, slot, active, countUp, onClick }) {
         ' ' +
         color.border +
         ' ' +
-        (active ? color.glow : '')
+        (active && inFocus ? color.glow : !active ? 'hover:shadow-[0_0_30px_rgba(45,212,191,0.18)]' : '')
       }
     >
       <Icon className={color.text} size={64} strokeWidth={1.5} aria-hidden="true" />
@@ -210,6 +218,7 @@ function CoverflowCard({ item, color, slot, active, countUp, onClick }) {
 function RecruiterImpact({ items }) {
   const containerRef = useRef(null)
   const inView = useInView(containerRef)
+  const [focusRef, inFocus] = useInFocus()
 
   const [index, setIndex] = useState(0)
   const [paused, setPaused] = useState(false)
@@ -270,20 +279,27 @@ function RecruiterImpact({ items }) {
 
   return (
     <div
-      ref={containerRef}
+      ref={(el) => {
+        containerRef.current = el
+        focusRef.current = el
+      }}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       className="w-full max-w-3xl mx-auto select-none"
     >
-      <span className="block text-center text-xs font-medium uppercase tracking-[0.2em] text-text-tertiary mb-4">
+      <Reveal
+        as="span"
+        delayMs={0}
+        className="block text-center text-xs font-medium uppercase tracking-[0.2em] text-text-tertiary mb-4"
+      >
         Impact
-      </span>
+      </Reveal>
 
       {/* Wider than the cards themselves (max-w-3xl vs a 288px card) on purpose -
           that's the space the prev/next cards peek into. Without this extra room
           the clip box was the same width as the card, so the blurred neighbors
           got clipped down to an invisible sliver instead of actually showing. */}
-      <div className="relative h-56 sm:h-60 overflow-hidden">
+      <Reveal delayMs={80} className="relative h-56 sm:h-60 overflow-hidden">
         {items.map((item, i) => (
           <CoverflowCard
             key={item.text}
@@ -292,12 +308,13 @@ function RecruiterImpact({ items }) {
             slot={slotFor(i)}
             active={i === index}
             countUp={inView && i === index}
+            inFocus={inFocus}
             onClick={() => goTo(i === prevIndex ? index - 1 : i === nextIndex ? index + 1 : i)}
           />
         ))}
-      </div>
+      </Reveal>
 
-      <div className="mt-6 flex items-center justify-center gap-2">
+      <Reveal delayMs={160} className="mt-6 flex items-center justify-center gap-2">
         {items.map((it, i) => {
           const dotColor = COLORS[i % COLORS.length]
           const active = i === index
@@ -315,7 +332,7 @@ function RecruiterImpact({ items }) {
             />
           )
         })}
-      </div>
+      </Reveal>
     </div>
   )
 }

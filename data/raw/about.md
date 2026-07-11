@@ -6,6 +6,12 @@ Cambridge Institute of Technology, Bangalore (CGPA 8.87/10, expected graduation 
 PRISM program, leading a 4-member team building a production-grade AI-based UE
 Capability Logs Extractor & Summarizer using RAG pipelines and LLM integration.
 
+As of the internship's current state (Jan 2026 – July 2026, ongoing): the team
+architected a hybrid system with both a deterministic rule-based parser and an
+LLM-based parser behind separate endpoints, plus a DUT vs. Reference comparison
+engine to validate parser output, and the work is currently under internal review
+for program certification.
+
 ## What I actually do
 
 I build full-stack, AI-powered production systems — not notebooks. My default stack is
