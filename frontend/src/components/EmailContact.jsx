@@ -33,7 +33,19 @@ function mailtoUrl(mode) {
 //   regardless of whether their device has a mail client configured)
 // - plain mailto: (native mail app - best on mobile / configured desktop clients)
 // - plain text address with copy-to-clipboard, for everyone else
-export default function EmailContact({ mode, className = '' }) {
+// compact: just the primary Gmail button, no secondary mailto link or copy
+// fallback - for spots (like the hero) where the full set of options would be
+// redundant with the dedicated Contact section.
+export default function EmailContact({ mode, className = '', compact = false }) {
+  if (compact) {
+    return (
+      <a href={gmailComposeUrl(mode)} target="_blank" rel="noreferrer" className={`gap-2 ${btnPrimary} ${className}`}>
+        <SiGmail className="w-4 h-4" style={{ color: '#EA4335' }} aria-hidden="true" />
+        Email Me
+      </a>
+    )
+  }
+
   return (
     <div className={`flex flex-col items-center gap-2 ${className}`}>
       <div className="flex flex-wrap items-center justify-center gap-2">

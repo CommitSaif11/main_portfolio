@@ -13,10 +13,10 @@ function IconLink({ href, label, children }) {
 }
 
 // Same 3 profiles everywhere: email, LinkedIn, GitHub.
-export default function SocialIcons({ className = '', mode }) {
+export default function SocialIcons({ className = '', mode, compact = false }) {
   return (
     <div className={`flex flex-col items-center gap-3 ${className}`}>
-      <EmailContact mode={mode} />
+      <EmailContact mode={mode} compact={compact} />
       <div className="flex flex-wrap items-center justify-center gap-3">
         <IconLink href={LINKEDIN_URL} label="LinkedIn">
           <FaLinkedin className="w-4 h-4" style={{ color: '#0A66C2' }} aria-hidden="true" />

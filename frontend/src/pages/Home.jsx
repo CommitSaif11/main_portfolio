@@ -116,7 +116,7 @@ function Hero({ mode, id }) {
         ))}
       </Reveal>
       <Reveal delayMs={360}>
-        <SocialIcons className="mt-6" mode={mode} />
+        <SocialIcons className="mt-6" mode={mode} compact />
       </Reveal>
     </section>
   )
