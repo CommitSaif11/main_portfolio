@@ -53,6 +53,11 @@
   --font-display: 'Space Grotesk', sans-serif;
   --font-sans: 'Inter', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
+
+  /* Shared static grain texture used by every card surface (see .card-noise
+     and .card-tint-* below) - stored once here since the same SVG data URI
+     would otherwise repeat verbatim across every color variant's rule. */
+  --card-noise-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 /* Mode-wide accent themes. Every Tailwind teal and coral utility (text, bg,
@@ -141,6 +146,23 @@ a, button {
   }
 }
 
+/* Check My Fit's submit button - a quiet sonar-ring pulse (same technique as
+   the chat widget's) so the button feels alive/inviting once it's actually
+   clickable, not just a static filled pill. Only applied while enabled (see
+   FitCheck.jsx) - a pulsing disabled button would be a false invitation. */
+@keyframes btn-sky-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.55);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(56, 189, 248, 0);
+  }
+}
+
+.btn-sky-pulse {
+  animation: btn-sky-pulse 2.2s ease-out infinite;
+}
+
 .chat-widget-glow {
   animation: chat-widget-pulse 2.4s ease-out infinite;
 }
@@ -211,27 +233,107 @@ a, button {
   animation: terminal-cursor-blink 1s step-start infinite;
 }
 
-/* Shared card surface - a barely-there diagonal gradient (not a flat fill) plus a
-   low-opacity static noise texture on top, so cards read as having quiet material
-   depth instead of a flat solid panel. Both layers are subtle by design: the
-   gradient stop is a ~12% color-mix toward the elevated surface tone, and the
-   noise alpha is baked into the SVG itself at 0.05, well below anything that
-   competes with card content. Static - no animation, negligible perf cost.
-   hover: swaps the gradient's base toward the existing hover-surface tone so the
-   pre-existing "lightens on hover" cue still works now that a flat background-color
-   utility can no longer show through an opaque background-image layer. */
+/* Shared card surface - a diagonal gradient (not a flat fill) plus a static noise
+   texture on top, so cards read as having quiet material depth instead of a flat
+   solid panel. The gradient stop is a ~20% color-mix toward the elevated surface
+   tone, and the noise alpha is baked into the SVG itself at 0.09 - both bumped up
+   from an initial pass that was too subtle to register, while staying well below
+   anything that competes with card content. Static - no animation, negligible perf
+   cost. hover: swaps the gradient's base toward the existing hover-surface tone so
+   the pre-existing "lightens on hover" cue still works now that a flat
+   background-color utility can no longer show through an opaque background-image
+   layer. */
 .card-noise {
   background-color: var(--bg-surface);
   background-repeat: repeat, no-repeat;
   background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
-    linear-gradient(135deg, var(--bg-surface) 0%, color-mix(in srgb, var(--bg-surface) 88%, var(--bg-elevated) 12%) 100%);
+    var(--card-noise-svg),
+    linear-gradient(135deg, var(--bg-surface) 0%, color-mix(in srgb, var(--bg-surface) 80%, var(--bg-elevated) 20%) 100%);
 }
 
 .card-noise:hover {
   background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
-    linear-gradient(135deg, var(--bg-surface-hover) 0%, color-mix(in srgb, var(--bg-surface-hover) 88%, var(--bg-elevated) 12%) 100%);
+    var(--card-noise-svg),
+    linear-gradient(135deg, var(--bg-surface-hover) 0%, color-mix(in srgb, var(--bg-surface-hover) 80%, var(--bg-elevated) 20%) 100%);
+}
+
+/* Recruiter-only card color-by-meaning system (Experience/violet, default
+   project cards/teal, AI-specific Stack tags/amber) - a stronger, more legible
+   version of .card-noise above: same noise + diagonal gradient, plus a third
+   background layer that washes the category color across the FULL card at
+   6-8% opacity, so the whole card's tone visibly shifts rather than just its
+   edge. (An earlier pass faded this wash to transparent by the card's
+   midpoint, which made it read as barely-there outside the top-left corner -
+   this version covers 0-100% so it's visible everywhere on the card.)
+   Deliberately kept separate from .card-noise (used by Friend mode's project
+   cards and the About page) so those stay exactly as before. */
+.card-tint-teal {
+  background-color: var(--bg-surface);
+  background-repeat: repeat, no-repeat, no-repeat;
+  background-image:
+    var(--card-noise-svg),
+    linear-gradient(135deg, rgba(45, 212, 191, 0.09), rgba(45, 212, 191, 0.04)),
+    linear-gradient(135deg, var(--bg-surface) 0%, color-mix(in srgb, var(--bg-surface) 80%, var(--bg-elevated) 20%) 100%);
+}
+.card-tint-teal:hover {
+  background-image:
+    var(--card-noise-svg),
+    linear-gradient(135deg, rgba(45, 212, 191, 0.13), rgba(45, 212, 191, 0.06)),
+    linear-gradient(135deg, var(--bg-surface-hover) 0%, color-mix(in srgb, var(--bg-surface-hover) 80%, var(--bg-elevated) 20%) 100%);
+}
+
+.card-tint-violet {
+  background-color: var(--bg-surface);
+  background-repeat: repeat, no-repeat, no-repeat;
+  background-image:
+    var(--card-noise-svg),
+    linear-gradient(135deg, rgba(167, 139, 250, 0.09), rgba(167, 139, 250, 0.04)),
+    linear-gradient(135deg, var(--bg-surface) 0%, color-mix(in srgb, var(--bg-surface) 80%, var(--bg-elevated) 20%) 100%);
+}
+.card-tint-violet:hover {
+  background-image:
+    var(--card-noise-svg),
+    linear-gradient(135deg, rgba(167, 139, 250, 0.13), rgba(167, 139, 250, 0.06)),
+    linear-gradient(135deg, var(--bg-surface-hover) 0%, color-mix(in srgb, var(--bg-surface-hover) 80%, var(--bg-elevated) 20%) 100%);
+}
+
+/* "How I work" - aurora green, kept distinct from Projects' teal so the two
+   adjacent-in-scroll sections don't read as the same category. Pushed to
+   15%/22% (vs. teal/violet's 9%/13%) since emerald and teal sit close enough
+   in hue that the normal strength wasn't reading as a different color. */
+.card-tint-aurora {
+  background-color: var(--bg-surface);
+  background-repeat: repeat, no-repeat, no-repeat;
+  background-image:
+    var(--card-noise-svg),
+    linear-gradient(135deg, rgba(52, 211, 153, 0.15), rgba(52, 211, 153, 0.07)),
+    linear-gradient(135deg, var(--bg-surface) 0%, color-mix(in srgb, var(--bg-surface) 80%, var(--bg-elevated) 20%) 100%);
+}
+.card-tint-aurora:hover {
+  background-image:
+    var(--card-noise-svg),
+    linear-gradient(135deg, rgba(52, 211, 153, 0.2), rgba(52, 211, 153, 0.1)),
+    linear-gradient(135deg, var(--bg-surface-hover) 0%, color-mix(in srgb, var(--bg-surface-hover) 80%, var(--bg-elevated) 20%) 100%);
+}
+
+/* Check My Fit (AI tool) - sky blue, moved off amber/yellow: amber didn't tint
+   a dark surface cleanly (read as olive/khaki), and reusing it here also
+   collided visually with the Stack section's AI/GenAI tag color. Sky tints
+   cleanly the same way teal/violet/aurora do, so this uses their normal
+   9-13% strength rather than amber's reduced 3% workaround. */
+.card-tint-sky {
+  background-color: var(--bg-surface);
+  background-repeat: repeat, no-repeat, no-repeat;
+  background-image:
+    var(--card-noise-svg),
+    linear-gradient(135deg, rgba(56, 189, 248, 0.09), rgba(56, 189, 248, 0.04)),
+    linear-gradient(135deg, var(--bg-surface) 0%, color-mix(in srgb, var(--bg-surface) 80%, var(--bg-elevated) 20%) 100%);
+}
+.card-tint-sky:hover {
+  background-image:
+    var(--card-noise-svg),
+    linear-gradient(135deg, rgba(56, 189, 248, 0.13), rgba(56, 189, 248, 0.06)),
+    linear-gradient(135deg, var(--bg-surface-hover) 0%, color-mix(in srgb, var(--bg-surface-hover) 80%, var(--bg-elevated) 20%) 100%);
 }
 
 /* Scroll-triggered entrance animation, driven by IntersectionObserver via Reveal.jsx */
@@ -334,6 +436,7 @@ a, button {
     transition: none;
   }
   .chat-widget-glow,
+  .btn-sky-pulse,
   .terminal-cursor,
   .impact-float-a,
   .impact-float-b,

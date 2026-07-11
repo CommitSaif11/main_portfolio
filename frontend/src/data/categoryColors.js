@@ -2,12 +2,15 @@ import skills from './skills.json'
 
 // Category → color mapping shared by the Stack section and any other tag/pill
 // grouping on the site (currently: project tech-stack tags), so the same
-// category always reads as the same color everywhere. Reuses the site's
-// existing 4-color palette (teal/violet/amber/coral - the same set the Impact
-// carousel cycles through) rather than introducing new colors. There's no blue
-// in that palette, so Databases falls back to coral, and Tools & Cloud reuses
-// teal instead of also using coral - keeps the two adjacent categories (as
-// listed in skills.json) visually distinct.
+// category always reads as the same color everywhere. Follows the site's
+// card color-by-meaning system: teal = default, violet = achievement/
+// credibility, amber = AI/GenAI - and coral is reserved exclusively for the
+// primary hero CTA, never used on a card or tag. With coral off the table,
+// Databases reuses violet instead (there's no blue in the palette) - safe
+// because Databases isn't adjacent to Frameworks (violet's other user) in the
+// skills.json category order, so no two adjacent categories still share a
+// color. Tools & Cloud reuses teal for the same reason (not adjacent to
+// Languages, teal's other user).
 export const CATEGORY_STYLES = {
   Languages: {
     tag:
@@ -29,9 +32,9 @@ export const CATEGORY_STYLES = {
   },
   Databases: {
     tag:
-      'text-[#FF7043] border-[#FF7043]/40 hover:border-[#FF7043] hover:bg-[#FF7043]/10 ' +
-      'hover:shadow-[0_0_16px_rgba(255,112,67,0.45)]',
-    label: 'text-[#FF7043]/80',
+      'text-[#A78BFA] border-[#A78BFA]/40 hover:border-[#A78BFA] hover:bg-[#A78BFA]/10 ' +
+      'hover:shadow-[0_0_16px_rgba(167,139,250,0.45)]',
+    label: 'text-[#A78BFA]/80',
   },
   'Tools & Cloud': {
     tag:

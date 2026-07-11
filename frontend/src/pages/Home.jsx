@@ -19,12 +19,13 @@ import {
   btnPrimary,
   btnSecondary,
   linkTeal,
-  cardBase,
+  cardShellBase,
+  CARD_ACCENT,
   mutedText,
-  cardInFocusGlow,
   cardFocusTransition,
 } from '../styles/classNames'
 import { categoryTagClass, categoryLabelClass } from '../data/categoryColors'
+import { CardAccentBar, CardBadge } from '../components/CardAccent'
 import useInFocus from '../hooks/useInFocus'
 import useReveal from '../hooks/useReveal'
 
@@ -181,11 +182,13 @@ function ExperienceSection({ id }) {
           inFocusRef.current = el
           revealRef.current = el
         }}
-        className={`reveal ${revealed ? 'is-visible' : ''} ${cardBase} h-auto ${cardFocusTransition} ${
-          inFocus ? cardInFocusGlow : ''
-        }`}
+        className={`reveal ${revealed ? 'is-visible' : ''} ${cardShellBase} ${CARD_ACCENT.violet.tint} h-auto ${
+          CARD_ACCENT.violet.hover
+        } ${cardFocusTransition} ${inFocus ? CARD_ACCENT.violet.focus : ''}`}
         style={{ transitionDelay: '80ms' }}
       >
+        <CardAccentBar color="violet" />
+        <CardBadge color="violet">Experience</CardBadge>
         <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
           <h3 className="text-lg font-semibold font-display text-text-primary">
             Project Intern - Samsung R&D Institute India (Samsung PRISM)
@@ -196,7 +199,6 @@ function ExperienceSection({ id }) {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-teal-400 opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-teal-400" />
             </span>
-            ongoing
           </span>
         </div>
 
@@ -263,10 +265,12 @@ function StorySection({ id }) {
           inFocusRef.current = el
           revealRef.current = el
         }}
-        className={`reveal ${revealed ? 'is-visible' : ''} ${cardBase} ${cardFocusTransition} ${
-          inFocus ? cardInFocusGlow : ''
-        }`}
+        className={`reveal ${revealed ? 'is-visible' : ''} ${cardShellBase} ${CARD_ACCENT.aurora.tint} ${
+          CARD_ACCENT.aurora.resting
+        } ${CARD_ACCENT.aurora.hover} ${cardFocusTransition} ${inFocus ? CARD_ACCENT.aurora.focus : ''}`}
       >
+        <CardAccentBar color="aurora" />
+        <CardBadge color="aurora">Approach</CardBadge>
         <Reveal as="h2" delayMs={0} className="text-xl font-semibold font-display text-text-primary">
           How I work
         </Reveal>
@@ -351,14 +355,29 @@ function SkillsSection({ id }) {
   )
 }
 
+// A faint fading line + its own generous margin, dropped between the page's
+// major zones (Experience+How I Work / Projects / Stack / Check My Fit) so
+// scrolling reads as moving through distinct areas instead of one continuous
+// column - on top of (not instead of) each section's own mt-20, so these
+// specific boundaries get visibly more breathing room than the ones between
+// closely-related sections (e.g. Experience -> How I Work).
+function SectionDivider() {
+  return (
+    <div
+      aria-hidden="true"
+      className="my-10 h-px w-full max-w-md mx-auto bg-gradient-to-r from-transparent via-border-default to-transparent"
+    />
+  )
+}
+
 // Recruiter also gets the fit-check tool inline on the scroll, so people who
 // never click through to the standalone /fit-check page still see it - the
 // dedicated route stays too, for direct/bookmarkable links from the nav.
 function FitCheckSection({ id }) {
   return (
-    <section id={id} className="mt-20 scroll-mt-24">
+    <Reveal as="section" id={id} className="mt-20 scroll-mt-24">
       <FitCheck embedded />
-    </section>
+    </Reveal>
   )
 }
 
@@ -464,8 +483,11 @@ function RecruiterHome() {
       <ImpactSection mode="recruiter" id="impact" />
       <ExperienceSection id="experience" />
       <StorySection id="story" />
+      <SectionDivider />
       <ProjectTeasersSection mode="recruiter" list={flagship} id="projects" />
+      <SectionDivider />
       <SkillsSection id="skills" />
+      <SectionDivider />
       <FitCheckSection id="fit-check" />
       <ContactSection id="contact" />
     </>

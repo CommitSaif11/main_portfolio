@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Reveal from '../components/Reveal'
-import { btnPrimary, linkTeal, mutedText, fadedText } from '../styles/classNames'
+import { btnSky, cardShellBase, CARD_ACCENT, linkTeal, mutedText, fadedText } from '../styles/classNames'
+import { CardAccentBar, CardBadge } from '../components/CardAccent'
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000'
 const NETWORK_ERROR_MESSAGE = "Couldn't reach the server just now - try again in a moment."
@@ -59,8 +60,28 @@ export default function FitCheck({ embedded = false }) {
 
   const disabled = loading || cooldown > 0 || !jobDescription.trim()
 
+  // Embedded (Home page): full card treatment - sky blue is this tool's own
+  // identity in the recruiter card color-by-meaning system (teal=default
+  // project cards, violet=Experience, aurora green=How I Work), kept off
+  // amber/yellow so it doesn't collide with the Stack section's AI/GenAI tag
+  // color. Standalone /fit-check page keeps its own plain page layout (it
+  // already has a back link + its own heading chrome, so a full card wrap
+  // there would be redundant), but still picks up the sky textarea/button for
+  // tool identity.
   return (
-    <div className={embedded ? '' : 'max-w-3xl mx-auto px-6 py-16'}>
+    <div
+      className={
+        embedded
+          ? `${cardShellBase} ${CARD_ACCENT.sky.tint} ${CARD_ACCENT.sky.resting} ${CARD_ACCENT.sky.hover}`
+          : 'max-w-3xl mx-auto px-6 py-16'
+      }
+    >
+      {embedded && (
+        <>
+          <CardAccentBar color="sky" />
+          <CardBadge color="sky">AI Tool</CardBadge>
+        </>
+      )}
       {!embedded && (
         <Link to="/" className={`text-sm ${linkTeal}`}>
           ← Back home
@@ -88,10 +109,16 @@ export default function FitCheck({ embedded = false }) {
             onChange={(e) => setJobDescription(e.target.value)}
             placeholder="Paste the job description here..."
             rows={10}
-            className="w-full border border-border-default bg-bg-surface text-text-primary rounded-md p-4 text-sm outline-none transition duration-fast ease focus:border-teal-500 resize-y"
+            className="w-full border border-border-default bg-bg-surface text-text-primary rounded-md p-4 text-sm outline-none transition duration-base ease focus:border-[#38BDF8] focus:shadow-[0_0_24px_rgba(56,189,248,0.45)] resize-y"
           />
           <div className="mt-4 flex flex-wrap items-center gap-3">
-            <button type="submit" disabled={disabled} className={`${btnPrimary} disabled:opacity-40`}>
+            <button
+              type="submit"
+              disabled={disabled}
+              className={`${btnSky} ${
+                disabled ? '' : 'btn-sky-pulse'
+              } disabled:opacity-70 disabled:hover:scale-100 disabled:hover:shadow-none`}
+            >
               {loading ? 'Analyzing...' : cooldown > 0 ? `Wait ${cooldown}s` : 'Check fit'}
             </button>
             {cooldown > 0 && !loading && (

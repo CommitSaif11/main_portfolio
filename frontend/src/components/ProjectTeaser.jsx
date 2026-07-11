@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
 import { LinkRow } from './ProjectCard'
-import { cardBase, mutedText, cardInFocusGlow, cardFocusTransition } from '../styles/classNames'
+import { cardShellBase, CARD_ACCENT, mutedText, cardFocusTransition } from '../styles/classNames'
 import { categoryTagClass, classifyTech } from '../data/categoryColors'
+import { CardAccentBar, CardBadge } from './CardAccent'
 import useInFocus from '../hooks/useInFocus'
 
 // Compact teaser - name, tagline, top metrics, live-demo/GitHub links (visible
@@ -9,15 +10,25 @@ import useInFocus from '../hooks/useInFocus'
 // tech stack, who it was built for) is hidden by default and animates open on
 // hover instead of hiding behind a "View project" link - the project name
 // itself still links out to /projects/:id for anyone who wants a permalink.
+// All project cards share one uniform teal accent - Projects reads as a single
+// category. Violet (Experience) and amber (AI/GenAI Stack tags) are the only
+// other colors in the recruiter-only card system; per-project accent coloring
+// was tried and reverted since it read as arbitrary/inconsistent (3 amber, 1
+// teal) rather than meaningful.
 export default function ProjectTeaser({ project }) {
   const extraMetrics = project.impact_metrics.slice(2)
   const [focusRef, inFocus] = useInFocus()
+  const accent = CARD_ACCENT.teal
 
   return (
     <div
       ref={focusRef}
-      className={`group ${cardBase} ${cardFocusTransition} ${inFocus ? cardInFocusGlow : ''}`}
+      className={`group ${cardShellBase} ${accent.tint} ${accent.hover} ${cardFocusTransition} ${
+        inFocus ? accent.focus : ''
+      }`}
     >
+      <CardAccentBar color="teal" />
+      <CardBadge color="teal">Project</CardBadge>
       <Link to={`/projects/${project.id}`} className="inline-block">
         <h3 className="text-lg font-semibold font-display text-text-primary group-hover:text-teal-400 transition duration-fast ease">
           {project.name}

@@ -6,7 +6,7 @@ import zoeVisorTeal from '../assets/mascots/zoe-visor-teal.png'
 import zoeVisorWarm from '../assets/mascots/zoe-visor_warm.png'
 
 const MOBILE_BREAKPOINT = 768 // matches Tailwind's md - cursor-follow/side-swap don't translate to touch
-const SIZE = 200 // ~1.45x the previous 140px - more visual presence
+const SIZE = 160 // scaled down 20% from 200 - felt too large at full size
 const EDGE_MARGIN = 24
 const HYSTERESIS_PX = 40 // avoids flip-flopping right at the screen midpoint
 const EYE_SHIFT_MAX = 9 // px the visor nudges toward the cursor - subtle, not a full head turn
