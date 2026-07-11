@@ -116,7 +116,7 @@ function Hero({ mode, id }) {
         ))}
       </Reveal>
       <Reveal delayMs={360}>
-        <SocialIcons className="mt-6" />
+        <SocialIcons className="mt-6" mode={mode} />
       </Reveal>
     </section>
   )
@@ -278,7 +278,7 @@ function ContactSection({ heading = "Let's talk", id }) {
       <p className={`mt-2 ${mutedText}`}>
         Fastest way to reach me is email - happy to talk roles, projects, or anything in between.
       </p>
-      <SocialIcons className="mt-5" />
+      <SocialIcons className="mt-5" mode="recruiter" />
       <div className="mt-6 flex flex-wrap justify-center gap-3">
         <a href="/resume.pdf" download className={btnSecondary}>
           Download Resume
@@ -296,7 +296,7 @@ function FriendContactSection({ id }) {
     <Reveal as="section" id={id} className="mt-20 text-center scroll-mt-24">
       <h2 className="text-xl font-semibold font-display text-text-primary">Say hi</h2>
       <p className={`mt-2 ${mutedText}`}>Pick your favorite way to bug me.</p>
-      <SocialIcons className="mt-5" />
+      <SocialIcons className="mt-5" mode="friend" />
       <div className="mt-6 flex flex-wrap justify-center gap-3">
         <a href="/resume.pdf" download className={btnSecondary}>
           The Serious Grown-Up PDF
