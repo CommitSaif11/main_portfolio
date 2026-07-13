@@ -67,7 +67,7 @@
       "Full Pytest suite with mocked S3 and database"
     ],
     "github": "https://github.com/CommitSaif11/ConnectHub",
-    "live_demo": null,
+    "live_demo": "https://connecthub-frontend-lu42.onrender.com",
     "role": "Solo",
     "tier": "flagship"
   },
@@ -100,7 +100,7 @@
       "Detects 6 life-event types from customer financial data",
       "Full reasoning transparency - 5 human-readable steps per response"
     ],
-    "github": null,
+    "github": "https://github.com/CommitSaif11/SBI_FINVERSE",
     "live_demo": null,
     "role": "Solo",
     "tier": "secondary"
